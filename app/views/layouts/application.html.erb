@@ -1,12 +1,46 @@
+<%= javascript_include_tag "application" %>
+<!-- список цветок
+000000  1F4E7D  375A7D
+000000  7D561F  7D6037  
+-->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Battle</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title><%= @title %></title>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/stylesheets' %>
+
+
+
 </head>
+
 <body>
+<!-- navbar-inverse -->	
+<div class="navbar">
+  	<div class="navbar-inner">
+  		<div class="container-fluid">
+
+  	  	<!--	
+  	  		<ul class="nav">
+  	    		<li class="active"><a href="#">На главную</a></li>
+  	    		<li class="divider-vertical"></li>
+  	    		<li class="divider-vertical"></li>
+  	    		<li class="divider-vertical"></li>
+  	    		<li class="divider-vertical"></li>
+  	    		<li class="divider-vertical"></li>
+  	    		<li class="divider-vertical"></li>  	    		  	    		
+  	    		<li><a href="#">Ссылка 1</a></li>
+  	    		<li><a href="#"></a></li>
+  	  		</ul>
+  	  	-->
+  	  		<a class="brand" href="#"><h1>Битвы Орла |</h1></a>
+  	  	</div?>
+  	</div>
+</div>
+
+
+
+
 
 <%= yield %>
 
