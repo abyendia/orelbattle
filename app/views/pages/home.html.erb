@@ -1,61 +1,65 @@
+<%
+  @border_div = 1
+
+%>
+
 <style>
+.container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
 .divcenter {
   margin-left: 30%;
 }
 </style>
 
 <br/>
-<div class="container-fluid">
-	<div class="row-fluid" style="border: solid 0px">
-		<div class="span6 offset3" style="border: solid 0px">
-			<div class="row-fluid" style="border: solid 0px">
-				<div class="span2 offset5" style="border: solid 0px">
-					<% logo = image_tag("decor/logo.jpg", :alt=>"Sample app", :class=>"img-rounded", :width => 420)%>
-	  				<%= link_to logo, root_path, :class => "" %>
+<div class="container-narrow">
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span6 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+				<div class="span12" style="border: solid <%= "#{@border_div}" %>px">
+					<!-- <img href="#" class="thumbnail"> -->
+					<p style="text-align:center">
+						<% logo = image_tag("decor/logo.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"100")%>
+						<%= link_to logo, root_path, :class => "thumbnail_null" %>
+					</p>
+	  				<%#= link_to logo, root_path, :class => "" %>
+	  			 	<!--</img> -->
 				</div>	
 			</div>
-			<div class="row-fluid" style="border: solid 0px">
-				<div class="span8 offset2" style="border: solid 0px">
+			<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+				<div class="span12" style="border: solid <%= "#{@border_div}" %>px">
 					<h1 style="text-align:center">
 			  			Битвы нашего города!
 					</h1>
 				</div>	
 			</div>
 		</div>
+	</div>
+
+
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span6 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<p class="lead" style="text-align:center">
+				Заголовок очередной битвы
+			</p>	
+		</div>		
 	</div>	
-	<!--
-	<div class="row-fluid" style="border: solid 1px">
-	  	<div class="span2 offset5" style="border: solid 1px">
-	  		<% logo = image_tag("decor/logo.jpg", :alt=>"Sample app", :class=>"img-rounded", :width => 120)%>
-	  		<%= link_to logo, root_path, :class => "" %>
-	  			
-	  	</div>
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span3 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<p class="lead" style="text-align:center">
+				<% logo = image_tag("battle/b-1.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250")%>
+					<%= link_to logo, root_path, :class => "thumbnail" %>
+			</p>	
+		</div>	
+		<div class="span3" style="border: solid <%= "#{@border_div}" %>px">
+			<p class="lead" style="text-align:center">
+				<% logo = image_tag("battle/b-3.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250") %>
+					<%= link_to logo, root_path, :class => "thumbnail" %>
+			</p>	
+		</div>		
 	</div>
 
-	<div class="row-fluid" style="border: solid 1px">
-		<div class="span6 offset4" style="border: solid 1px">
-			<h1>
-			  	Битвы нашего города!
-			</h1>
-		</div>
-	</div>
 
-	<div class="row-fluid" style="border: solid 1px">
-
-	  	<div class="span6 offset3" style="border: solid 1px">
-	  		<h1>
-
-	  		</h1>	
-	  		<p class="lead" style="text-align:center">
-	  			На этом сайте будут битвы, битвы, а потом еще битвы и уже, наконец, битвы 
-	  			На этом сайте будут битвы, битвы, а потом еще битвы и уже, наконец, битвы 
-	  		</p>
-	  		<div>
-        		<a class="btn btn-large btn-success" href="#">Я готов!</a>
-        		<a class="btn btn-large btn-danger" href="#">Пока боюсь</a>
-        	</div>
-	  	</div>
-	  	
-	</div>
-	-->
 </div>	
