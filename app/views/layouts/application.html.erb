@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--
+<script src="http://vkontakte.ru/js/api/xd_connection.js?2" type="text/javascript"></script>
+-->
   <title><%= @title %></title>
   <%= csrf_meta_tags %>
   <%= render 'layouts/stylesheets' %>
@@ -15,13 +18,17 @@
 </head>
 
 <body>
+<br/>
+<div class="container-narrow">
+    <%= yield %>
+</div>
 
 
 
 
 
 <%#= render 'layouts/header' %>
-<%= yield %>
+
 
 </body>
 </html>

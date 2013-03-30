@@ -1,6 +1,9 @@
 Battle::Application.routes.draw do
 
+  resources :lots
+
   match "/home", :to => "pages#home"
+  
 
   root :to => "pages#home"
   # The priority is based upon order of creation:

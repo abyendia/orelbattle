@@ -1,3 +1,4 @@
+<%= render 'layouts/stylesheets' %>
 <%
   @border_div = 0
   @description1 = "BlaBlaBlaBlaBlaBla BlaBla 				 BlaBlaBla BlaBlaBlaBlaBlaBla BlaBla BlaBlaBla BlaBlaBlaBlaBlaBla BlaBla BlaBlaBla"
@@ -11,17 +12,18 @@
 %>
 
 <style>
+/*
 #share_left_vk{
 	cursor:pointer;
 }
 .my_line {
         line-height: 1.1;
         margin-top: 5%;
-      }
+      }      
 .container-narrow {
         margin: auto auto;
         max-width: 700px;
-      }
+      }      
 .divcenter {
   margin-left: 30%;
 }
@@ -31,6 +33,7 @@
 	margin-left: 30%;
     margin-right: auto;
 }
+*/
 </style>
 <script>
 var win= null;
@@ -59,6 +62,24 @@ var win= null;
 //countServiceUrl: 'http://urls.api.twitter.com/1/urls/count.json?url='
 //https://api.facebook.com/method/fql.query?format=json&query=
 	//var fql = 'SELECT share_count FROM link_stat WHERE url="' + url + '"';
+
+
+//Запихиваем сюда же и фейсбучный код
+//    this.getCountShareFB = function (){
+//
+//		var
+//		//serviceURL = "http://urls.api.twitter.com/1/urls/count.json?url=";
+//		thisURL = "http://newbattle.ru/";
+//		fql = 'SELECT share_count FROM link_stat WHERE url="' + thisURL + '"';
+//		serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
+//		alert(serviceURL);
+//		resultURL = serviceURL// + thisURL;
+//		_this = this
+//		$.getJSON(resultURL,function(response){
+//			alert(response[0].share_count);
+//		});
+//	}	
+
 
 //=================================================================
 //Контейнеры социальных настроек
@@ -89,12 +110,8 @@ var vkontakte_setting_obj = {
 var VK = {
 	count_value: 666,
     Share: {
-    	//this_: this;
         count: function(value, count) {
-            //$('#vk_lot_left').html(count);
-            //alert(count);
             VK.count_value = count;
-            //alert(count)//$('#vkontakte_count').html(count);
         }
     }
 }
@@ -126,8 +143,7 @@ function new_share_constructor(){
 			url += '&description=' + encodeURIComponent(text);
 		}		
 		if (pimg.length > 0) {
-			//url += '&image='       + encodeURIComponent(pimg);
-
+			url += '&image='       + encodeURIComponent(pimg);
 		}
 		this.url_params = url
 	}
@@ -161,12 +177,6 @@ function Provider(){
 		_this = this;
 		switch (this.uid) {
 			case "VK":
-				//$.getJSONP(this.url_get_share+this.shares_url, function(response){
-					//alert("From class"+window.VK.count_value);
-  						//_this.count_share = window.VK.count_value;
-						//TODO Проверка на существование переданного элеемнта - alert('Установите DOM для вывода значения') 
-						//_this.elem_view.html(window.VK.count_value);			
-  				//	});	
 				$.getJSON(this.url_get_share+this.shares_url+"&callback=?", function(response){}).complete(function(  ) {
 						//TODO Проверка на существование переданного элеемнта - alert('Установите DOM для вывода значения') 
 						_this.elem_view.html(window.VK.count_value);			
@@ -192,43 +202,15 @@ function Provider(){
 				alert('Других социальных сетей мы не знаем');									
 		}
 	}
-//Запихиваем сюда же и фейсбучный код
-    this.getCountShareFB = function (){
-
-		var
-		//serviceURL = "http://urls.api.twitter.com/1/urls/count.json?url=";
-		thisURL = "http://newbattle.ru/";
-		fql = 'SELECT share_count FROM link_stat WHERE url="' + thisURL + '"';
-		serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
-		alert(serviceURL);
-		resultURL = serviceURL// + thisURL;
-		_this = this
-		$.getJSON(resultURL,function(response){
-			alert(response[0].share_count);
-		});
-		//$.ajax({
-		//	url: resultURL,
-		//	dataType: 'JSONP',
-		//	complete: function(data, status) {
-		//		//alert(data[0].share_count);
-		//		_this.count_share = data[0].share_count
-		//		//TODO Проверка на существование переданного элеемнта - alert('Установите DOM для вывода значения') 
-		//		_this.elem_view.html(_this.count_share);
-		//	}	
-		//});
-	}	
 
 
 
 } 
-Provider.prototype =  new  new_share_constructor()//share_constructor()//Sharer
-//function vkontakte_provider(){
-//	this.example = "ex";
-//	this.count_share = "default nothing";
-//	this.elem_view = "default nothing"
 
-//}
-//vkontakte_provider.prototype = new Provider()
+//======================================================
+//Секция инициализации
+//======================================================
+Provider.prototype =  new  new_share_constructor()//share_constructor()//Sharer
 
 vkontakte_obj = new Provider()
 vkontakte_obj.url_set_share= vkontakte_setting_obj.url_set_share;
@@ -248,61 +230,12 @@ twitter_obj.url_get_share = twitter_setting_obj.url_get_share;
 twitter_obj.shares_url='http://newbattle.ru/';
 twitter_obj.uid = twitter_setting_obj.uid;
 
+//Секция инициализации
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 $(function(){
 	vkontakte_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')
-	twitter_obj.elem_view = $('#vk_lot_left');
 	vkontakte_obj.elem_view= $('#vk_lot_left');
-	//alert(vkontakte_obj.url_set_share);
-	$('#example').click(function(){
-		//alert(vkontakte_obj.example);
-vkontakte_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')
-twitter_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')
-facebook_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')
-//vkontakte_obj.share();
-		//vkontakte_obj.getCountShare();
-		//twitter_obj.getCountShare();
-		//facebook_obj.share();
-		vkontakte_obj.share();
-	})
-
-	//function getCountShare(){
-	//	var
-	//	//serviceURL = "http://urls.api.twitter.com/1/urls/count.json?url=";
-	//	serviceURL = "http://vk.com/share.php?act=count&url=";
-	//	thisURL = "http://newbattle.ru/&callback=?";
-	//	resultURL = serviceURL + thisURL;
-	//
-	//	$.ajax({
-	//		url: resultURL,
-	//		dataType: 'JSONP',
-	//		error: function(data, status) {
-	//			//alert('Что-то возвращаем');
-	//			//alert(data);
-	//			 //if(status == 'success' && data[0]) {
-	//			 //	alert(data[0].share_count);
-	//			 //}	
-	//		}	
-	//	});
-	//}
-	 //timer;
-	//$(wnd_transport).click(function(){
-	//	alert('you are clicking for self window');
-	//});
-	
-	
-	//window.open("http://www.ya.ru",'','toolbar=0,status=0,width=626,height=436');
-	//$(window).onload(function(){
-	//	alert('resize')
-	//});
-	//alert('ok');
-
-//$(window).bind('unload',function () {
-//	 alert("Bye now!"); 
-//	});
-	// wnd_transport.onUnLoad(function(){
-	// 	alert("working");
-	// });
 	var img = '<img src="https://si0.twimg.com/a/1339639284/images/three_circles/twitter-bird-white-on-blue.png"/>';
 	soc_f = '<img src="assets/decor/Facebook.png" id="share_left_vk" />';
 	soc_t = '<img src="assets/decor/Twitter.png" />';
@@ -314,28 +247,17 @@ facebook_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@
 							html: 'true', 
 							placement: 'left',
 							content: soc_f+soc_t+soc_v }	);
-	$('#test_share').live("click", function(){
-		getCountShare();
-	}); 
 	$('#share_left_vk').live("click",function(){
 		vkontakte_obj.share();
 		var timer = setInterval(function () {
  		    if (win.closed){
- 		      
- 		      //alert('Закрылось');//refresh_auth_area();
  		      vkontakte_obj.getCountShare();
- 		      //alert("Получили, записали в объект и вывели:");
- 		      // /alert(vkontakte_obj.count_share);
- 		      
- 		      //getCountShare();
  		      setTimeout(function(){ 
  		      clearInterval(timer);
  		      win = null;
  		    } , 10);
  		  }
  		}, 20);
- 		//Share.vkontakte('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>');
- 		
  	});
 
  	$('#b2').tooltip({ html: 'true', 
@@ -453,10 +375,4 @@ facebook_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@
 
 
 </div>	
-<a href="#" id="example" class="btn btn-success" rel="popover">hover for popover</a>
-
-<a onclick="Share.vkontakte('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')"> шарь меня полностью</a>
-
-<a onclick="Share.vkontakte('<%= "#{@url_vk}" %>','TITLE','IMG_PATH','DESC')"> Шарь</a>
-<a href="#" id="test_share" > Experiment </a>
         
