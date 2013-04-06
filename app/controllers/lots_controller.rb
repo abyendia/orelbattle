@@ -44,7 +44,7 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       if @lot.save
-        format.html { redirect_to @lot, :notice => 'Lot was successfully created.' }
+        format.html { redirect_to lots_path, :notice => 'Lot was successfully created.' }
         format.json { render :json => @lot, :status => :created, :location => @lot }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class LotsController < ApplicationController
 
     respond_to do |format|
       if @lot.update_attributes(params[:lot])
-        format.html { redirect_to @lot, :notice => 'Lot was successfully updated.' }
+        format.html { redirect_to lots_path, :notice => 'Lot was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -80,4 +80,14 @@ class LotsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def one_lot
+    @lots = Lot.all
+    @opponent_number = params[:opponent]
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end  
+  end  
+
 end

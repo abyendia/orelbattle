@@ -1,0 +1,58 @@
+<%#= render :partial => 'shared/admin_head' %>
+<div class="row-fluid center-elem update_big_elem">
+    <h1>Битвы</h1>  
+</div>    
+<div>
+<div class="row-fluid center-elem">
+
+
+<table class="table table-striped " > <!-- класс сетки для таблицы table-bordered -->
+  <tr>
+    <th>Имя</th>
+    <th>
+      <div class="center-elem">
+        Описание
+      </div>
+    </th>
+    <th>Первый оппонент</th>
+    <th>Второй оппонент</th>        
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @buttles.each do |buttle| %>
+  <tr>
+    <td >
+      <p class="name_wrap mywrap">
+        <%= buttle.name %>
+      </p>
+    </td>
+    <td >
+      <p class="desc_wrap mywrap">      
+          <small><%= buttle.description %></small>
+      </p>    
+    </td>
+
+    <td>
+      <div class="center-elem">
+        <%= image_tag buttle.opponent_first.image(:small) if buttle.opponent_first  %>
+      </div>
+    </td>
+    <td>
+      <div class="center-elem">
+        <%= image_tag buttle.opponent_second.image(:small) if buttle.opponent_second %>
+      </div>
+    </td>    
+
+    <td><%= link_to 'Редактировать', edit_buttle_path(buttle), :class=>"btn btn-warning " %></td>
+    <td><%= link_to 'Удалить', buttle, :method => :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
+  </tr>
+<% end %>
+</table>
+
+  
+
+<br />
+
+<%= link_to 'Новая битва', new_buttle_path, :class => "btn btn-large btn-simple" %>
+</div>

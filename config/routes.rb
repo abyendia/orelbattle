@@ -1,6 +1,14 @@
 Battle::Application.routes.draw do
 
-  resources :lots
+  resources :buttles
+
+  resources :lots do
+    collection do       
+      get :one_lot
+    end
+    member do 
+    end  
+  end  
 
   match "/home", :to => "pages#home"
   

@@ -12,6 +12,11 @@
  *= require_tree .
  */
 
+textarea {
+  height: 150px !important;
+  width: 350px !important;  
+}
+
 #share_left_vk{
 	cursor:pointer;
 }
@@ -41,3 +46,72 @@
 .a {
 	color: white;
 }
+
+.navigation_admin {
+  height: 30px;
+}
+
+.clear {
+  clear: right;
+}
+
+.modal {
+  display:none ;
+}
+
+.update_big_elem {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.update_big_elem h1{
+  font-size: 40px;
+  line-height: 1;
+}
+
+.update_div {
+  width: 30px;
+}
+
+.mywrap {
+  word-wrap: break-word;
+}
+
+
+.name_wrap {
+  width: 100px; 
+}
+
+
+.desc_wrap {
+  width: 200px; 
+}
+.btn.btn-info {
+  color: white;
+}
+
+.btn.btn-warning {
+  color: white;
+}
+
+.btn.btn-danger {
+  color: white;
+}
+
+a.btn.btn-simple {
+  color: black !important;
+}
+
+.modal {
+  width: 660px !important;
+}
+
+/* Костыль - бутстрап не всегда отображает текст на кнопках белым*/
+
+/*
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+*/
+

@@ -1,11 +1,34 @@
+<script>
+$(function(){
+  $('#myModal').modal('hide')
+  //$('#myModal').modal(options)
+ //$('#myModal').modal('toogle')
+  $('#my_custom_modal').click(function(){
+    $('#myModal').show();
+  }) 
+})
 
-<p id="notice"><%= notice %></p>
+</script>
+<div class="row-fluid center-elem">
 
-<p>
-  <b>Name:</b>
-  <%= @lot.name %>
-</p>
-
-
+  <div class="control-group">
+    <label class="control-label" for="inputEmail"> Имя </label>
+    <div class="controls">
+      <%= label_tag @lot.name %><br />
+    </div>  
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputEmail"> Описание </label>   
+    <div class="controls">
+    <%= label_tag @lot.description %><br />
+    </div>     
+  </div>  
+  <div class="control-group">
+    <div class="controls">    
+      <%= image_tag @lot.image %> 
+    </div>
+  </div>
+</div>  
 <%= link_to 'Edit', edit_lot_path(@lot) %> |
 <%= link_to 'Back', lots_path %>
+

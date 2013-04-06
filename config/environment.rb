@@ -4,3 +4,5 @@ require File.expand_path('../application', __FILE__)
 #Сделать рубильник - голоса считаются при шаринге или при открытии окна соц сети - как на 1001 голос
 # Initialize the rails application
 Battle::Application.initialize!
+
+ENV['CLASS']  = "Lot"

@@ -1,4 +1,5 @@
 class Buttle < ActiveRecord::Base
-	belongs_to :opponent_1, :class_name => "Lot", :foreign_key => "opponent_1"
-	belongs_to :opponent_2, :class_name => "Lot", :foreign_key => "opponent_2"
+	attr_protected :opp_voice_vk_1,	:opp_voice_vk_2
+	belongs_to :opponent_first, :class_name => "Lot", :foreign_key => "opponent_1"
+	belongs_to :opponent_second, :class_name => "Lot", :foreign_key => "opponent_2"
 end	

@@ -1,5 +1,5 @@
 
-<div class="row-fluid center-elem">
+<div class="row-fluid center-elem update_big_elem">
     <h1>Лоты для голосования</h1>
 </div>    
 <div>
@@ -9,19 +9,29 @@
 <table class="table table-striped">
   <tr>
     <th>Имя</th>
-    <th>Описание</th>
+    <th>
+      <div class="center-elem">
+        Описание
+      </div>
+    </th>
     <th>Картинка</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @lots.each do |lot| %>
   <tr>
-    <td><%= lot.name %></td>
-    <td><%= lot.description %></td>
-    <td><%= image_tag lot.image.url(:thumb), :class => "img-polaroid"  %></td>
-    <td><%= link_to 'Открыть', lot, :class => "btn btn-info" %></td>
+    <td>
+      <p class="name_wrap mywrap">
+        <%= lot.name %>
+      </p>
+    </td>
+    <td>
+      <p class="desc_wrap mywrap">
+        <%= lot.description %>
+      </p>
+    </td>
+    <td><%= image_tag lot.image.url(:small), :class => "img-polaroid"  %></td>
     <td><%= link_to 'Редактировать', edit_lot_path(lot), :class => "btn btn-warning" %></td>
     <td><%= link_to 'Удалить', lot, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger" %></td>
   </tr>
@@ -30,6 +40,6 @@
 
 <br />
 
-<%= link_to 'New Lot', new_lot_path %>
+<%= link_to 'Новый лот', new_lot_path, :class=>"btn btn-large btn-simple" %>
   </div>
 </div>

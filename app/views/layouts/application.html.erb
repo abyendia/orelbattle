@@ -19,7 +19,11 @@
 
 <body>
 <br/>
+
 <div class="container-narrow">
+  <!-- админская навигационная панель
+       должны быть какие-то if, чтобы пустить ее во вью -->
+  <%= render :partial => 'shared/admin_head' %>
     <%= yield %>
 </div>
 
