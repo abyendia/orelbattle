@@ -1,0 +1,347 @@
+
+<%
+  @border_div = 0
+  @description1 = "BlaBlaBlaBlaBlaBla BlaBla 				 BlaBlaBla BlaBlaBlaBlaBlaBla BlaBla BlaBlaBla BlaBlaBlaBlaBlaBla BlaBla BlaBlaBla"
+  @description2 = "Битва (Генеральное сражение) — широкомасштабные военные действия (включающие боевые действия) между двумя сторонами, находящимися друг с другом в состоянии войны. Название битве, как правило, даётся по местности, где она состоялась. Битвы отличаются от боёв и сражений своим масштабом и значением и нередко решающей ролью для исхода войны."
+
+  @url_vk = "http://qwertytestytrewq.ru/"
+  @title_vk = "test post" 
+  @image_path_vk = "http://localhost:3000/assets/decor/logo.jpg" 
+  @desc_vk = "this is test message, please give me to post them"
+
+%>
+<script>
+var win= null;
+
+//var timer = setInterval(function () {
+//       if (win.closed){
+//         alert('Закрылось');//refresh_auth_area();
+//         setTimeout(function(){ 
+//         clearInterval(timer);
+//       } , 10);
+//     }
+//   }, 20);
+
+//Отправка на стены соц сетей
+//http://www.facebook.com/sharer/sharer.php?
+//http://vkontakte.ru/share.php?
+//getShareLink: function() {
+	//    return 'https://twitter.com/share'
+	//	    + '?url=' + encodeURIComponent(this.linkToShare)
+	//	    + (this.title ? '&text=' + encodeURIComponent(this.title) : '');
+	//},
+
+
+//Подсчет шарингов в ВК-тви-фейс
+//http://vk.com/share.php?act=count&url=http://newbattle.ru/
+//countServiceUrl: 'http://urls.api.twitter.com/1/urls/count.json?url='
+//https://api.facebook.com/method/fql.query?format=json&query=
+	//var fql = 'SELECT share_count FROM link_stat WHERE url="' + url + '"';
+
+
+//Запихиваем сюда же и фейсбучный код
+//    this.getCountShareFB = function (){
+//
+//		var
+//		//serviceURL = "http://urls.api.twitter.com/1/urls/count.json?url=";
+//		thisURL = "http://newbattle.ru/";
+//		fql = 'SELECT share_count FROM link_stat WHERE url="' + thisURL + '"';
+//		serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
+//		alert(serviceURL);
+//		resultURL = serviceURL// + thisURL;
+//		_this = this
+//		$.getJSON(resultURL,function(response){
+//			alert(response[0].share_count);
+//		});
+//	}	
+
+
+//=================================================================
+//Контейнеры социальных настроек
+//=================================================================
+
+var facebook_setting_obj = {
+	url_set_share: 'http://www.facebook.com/sharer/sharer.php?',
+	uid: "FB",
+}
+
+var twitter_setting_obj = {
+	url_set_share: 'https://twitter.com/share?',
+	uid: "TW",
+}
+
+var vkontakte_setting_obj = {
+	url_set_share: 'http://vkontakte.ru/share.php?',
+	url_get_share: 'http://vk.com/share.php?act=count&url=',
+	uid: "VK",
+}	
+//Контейнеры социальных настроек
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//=================================================================
+//Костылек для Вконтакте
+//=================================================================
+
+var VK = {
+	count_value: 666,
+    Share: {
+        count: function(value, count) {
+            VK.count_value = count;
+        }
+    }
+}
+//Костылек для Вконтакте
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+function extend(Child, Parent) {
+	var F = function() { }
+	F.prototype = Parent.prototype
+	Child.prototype = new F()
+	Child.prototype.constructor = Child
+	Child.superclass = Parent.prototype
+}
+
+
+function new_share_constructor(){
+	this.url_params = "";
+	this.make_params = function(purl, ptitle, pimg, text){
+		url = "";
+		if (purl.length > 0) {
+			url += 'url=' + encodeURIComponent(purl);
+		}
+		if (ptitle.length > 0) {
+			url += '&title='       + encodeURIComponent(ptitle);
+		}
+		if (text.length > 0) {
+			url += '&description=' + encodeURIComponent(text);
+		}		
+		if (pimg.length > 0) {
+			url += '&image='       + encodeURIComponent(pimg);
+		}
+		this.url_params = url
+	}
+}
+
+function Provider(){
+	this.url_set_share= "default";
+	this.url_get_share = "default";
+	this.uid = "default";
+	this.shares_url = "default";//example mysite.rus
+	
+
+	this.alert_par = function(){
+		alert(this.uid);
+	}
+	this.share = function() {
+        url = this.url_set_share+this.url_params
+        popup_res=this.popup(url);
+    }
+  	this.popup = function(url) {
+  		//timer;
+        var w=window.open(url,'','toolbar=0,status=0,width=626,height=436');
+        win = w;
+    }
+    this.count_share = "default nothing";
+	this.elem_view = "default nothing"
+
+    this.getCountShare = function (){
+
+		var
+		_this = this;
+		switch (this.uid) {
+			case "VK":
+				$.getJSON(this.url_get_share+this.shares_url+"&callback=?", function(response){}).complete(function(  ) {
+						//TODO Проверка на существование переданного элеемнта - alert('Установите DOM для вывода значения') 
+						_this.elem_view.html(window.VK.count_value);			
+  					});				
+				break
+			case "FB":
+				fql = 'SELECT share_count FROM link_stat WHERE url="' + this.shares_url + '"';
+				serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
+				$.getJSON(resultURL,function(response){
+					alert(response[0].share_count);
+					_this.elem_view.html(response[0].share_count);
+
+				});
+				break
+			case "TW":
+				$.getJSON(this.url_get_share+this.shares_url,function(response){
+					alert(response.count);
+					_this.elem_view.html(response[0].share_count);
+
+				});
+				break
+			default:
+				alert('Других социальных сетей мы не знаем');									
+		}
+	}
+
+
+
+} 
+
+//======================================================
+//Секция инициализации
+//======================================================
+Provider.prototype =  new  new_share_constructor()//share_constructor()//Sharer
+
+vkontakte_obj = new Provider()
+vkontakte_obj.url_set_share= vkontakte_setting_obj.url_set_share;
+vkontakte_obj.url_get_share = vkontakte_setting_obj.url_get_share;
+vkontakte_obj.shares_url="<%= @url_vk %>";
+vkontakte_obj.uid = vkontakte_setting_obj.uid;
+
+facebook_obj = new Provider()
+facebook_obj.url_set_share= facebook_setting_obj.url_set_share;
+facebook_obj.url_get_share = facebook_setting_obj.url_get_share;
+facebook_obj.shares_url='http://newbattle.ru/';
+facebook_obj.uid = facebook_setting_obj.uid;
+
+twitter_obj = new Provider()
+twitter_obj.url_set_share= twitter_setting_obj.url_set_share;
+twitter_obj.url_get_share = twitter_setting_obj.url_get_share;
+twitter_obj.shares_url='http://newbattle.ru/';
+twitter_obj.uid = twitter_setting_obj.uid;
+
+//Секция инициализации
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+$(function(){
+	vkontakte_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')
+	vkontakte_obj.elem_view= $('#vk_lot_left');
+	var img = '<img src="https://si0.twimg.com/a/1339639284/images/three_circles/twitter-bird-white-on-blue.png"/>';
+	soc_f = '<img src="assets/decor/Facebook.png" id="share_left_vk" />';
+	soc_t = '<img src="assets/decor/Twitter.png" />';
+	soc_v = '<img src="assets/decor/Tumblr.png" />';
+	$("#voice2").popover({ title: 'Воспользуйтесь соц.сетью', 
+							html: 'true', 
+							content: soc_f+soc_t+soc_v });
+	$("#voice1").popover({ title: 'Воспользуйтесь соц.сетью', 
+							html: 'true', 
+							placement: 'left',
+							content: soc_f+soc_t+soc_v }	);
+	$('#share_left_vk').live("click",function(){
+		vkontakte_obj.share();
+		var timer = setInterval(function () {
+ 		    if (win.closed){
+ 		      vkontakte_obj.getCountShare();
+ 		      setTimeout(function(){ 
+ 		      clearInterval(timer);
+ 		      win = null;
+ 		    } , 10);
+ 		  }
+ 		}, 20);
+ 	});
+
+ 	$('#b2').tooltip({ html: 'true', 
+ 					   title: '<p class="my_line"><%= @description2 %></p>', 
+					   placement: 'right'});
+ 	$('#b1').tooltip({  title: '<p class="my_line"><%= @description1 %></p>', 
+						html: 'true', 
+						placement: 'left' }	)
+
+ 	
+
+});
+//thumbnail
+
+</script>
+
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span12" style="border: solid <%= "#{@border_div}" %>px">
+			<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+				<div class="span12" style="border: solid <%= "#{@border_div}" %>px">
+					<!-- <img href="#" class="thumbnail"> -->
+					<p style="text-align:center">
+						<% logo = image_tag("decor/logo.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"100")%>
+						<%= link_to logo, root_path, :class => "thumbnail_null" %>
+					</p>
+	  				<%#= link_to logo, root_path, :class => "" %>
+	  			 	<!--</img> -->
+				</div>	
+			</div>
+			<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+				<div class="span12" style="border: solid <%= "#{@border_div}" %>px">
+					<h1 style="text-align:center">
+			  			Битвы нашего города!
+					</h1>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<hr>
+
+
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span6 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<p class="lead" style="text-align:center">
+				Заголовок очередной битвы
+			</p>	
+		</div>		
+	</div>	
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span3 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<p class="lead" style="text-align:center">
+				<% logo = image_tag("battle/b-1.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250")%>
+					<%= link_to logo, root_path, :class => "thumbnail", 
+												 :id => "b1",
+												 :rel=>"tooltip"%>
+			</p>
+		</div>	
+		<div class="span3" style="border: solid <%= "#{@border_div}" %>px">
+			<p class="lead" style="text-align:center">
+				<% logo = image_tag("battle/b-3.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250") %>
+					<%= link_to logo, root_path, :class => "thumbnail", :id => "b2", 
+												 :rel=>"tooltip" %>
+			</p>	
+		</div>		
+	</div>
+
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span3 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				<button class="btn btn-large btn-info" id="voice1" type="button" rel="popover">Голосовать</button>
+			</p>	
+		</div>	
+		<div class="span3" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center" >				
+  				<button class="btn btn-large btn-success" id="voice2" type="button">Голосовать</button>
+			</p>
+		</div>	
+	</div>	
+
+	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
+		<div class="span1 offset3" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				vk: <span class="count_voice" id="vk_lot_left">1</span>
+			</p>	
+		</div>	
+		<div class="span1" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				fb: <span class="count_voice" id="fb_lot_left">1</span>
+			</p>	
+		</div>	
+		<div class="span1" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				tw: <span class="count_voice" id="tw_lot_left">1</span>
+			</p>	
+		</div>	
+		<div class="span1" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				vk: <span class="count_voice" id="vk_lot_right">1</span>
+			</p>	
+		</div>	
+		<div class="span1" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				fb: <span class="count_voice" id="fb_lot_right">1</span>
+			</p>	
+		</div>	
+		<div class="span1" style="border: solid <%= "#{@border_div}" %>px">
+			<p style="text-align:center">
+  				tw: <span class="count_voice" id="tw_lot_right">1</span>
+			</p>	
+		</div>	
+	</div>	
+        

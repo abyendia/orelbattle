@@ -1,212 +1,17 @@
 
-<%
-  @border_div = 0
-  @description1 = "BlaBlaBlaBlaBlaBla BlaBla 				 BlaBlaBla BlaBlaBlaBlaBlaBla BlaBla BlaBlaBla BlaBlaBlaBlaBlaBla BlaBla BlaBlaBla"
-  @description2 = "Битва (Генеральное сражение) — широкомасштабные военные действия (включающие боевые действия) между двумя сторонами, находящимися друг с другом в состоянии войны. Название битве, как правило, даётся по местности, где она состоялась. Битвы отличаются от боёв и сражений своим масштабом и значением и нередко решающей ролью для исхода войны."
+<% content_for :javascripts do %>
+  <%= javascript_include_tag 'vote/vote.js' %>
+<% end %>
 
-  @url_vk = "http://qwertytestytrewq.ru/"
-  @title_vk = "test post" 
-  @image_path_vk = "http://localhost:3000/assets/decor/logo.jpg" 
-  @desc_vk = "this is test message, please give me to post them"
 
-%>
 <script>
-var win= null;
-
-//var timer = setInterval(function () {
-//       if (win.closed){
-//         alert('Закрылось');//refresh_auth_area();
-//         setTimeout(function(){ 
-//         clearInterval(timer);
-//       } , 10);
-//     }
-//   }, 20);
-
-//Отправка на стены соц сетей
-//http://www.facebook.com/sharer/sharer.php?
-//http://vkontakte.ru/share.php?
-//getShareLink: function() {
-	//    return 'https://twitter.com/share'
-	//	    + '?url=' + encodeURIComponent(this.linkToShare)
-	//	    + (this.title ? '&text=' + encodeURIComponent(this.title) : '');
-	//},
 
 
-//Подсчет шарингов в ВК-тви-фейс
-//http://vk.com/share.php?act=count&url=http://newbattle.ru/
-//countServiceUrl: 'http://urls.api.twitter.com/1/urls/count.json?url='
-//https://api.facebook.com/method/fql.query?format=json&query=
-	//var fql = 'SELECT share_count FROM link_stat WHERE url="' + url + '"';
-
-
-//Запихиваем сюда же и фейсбучный код
-//    this.getCountShareFB = function (){
-//
-//		var
-//		//serviceURL = "http://urls.api.twitter.com/1/urls/count.json?url=";
-//		thisURL = "http://newbattle.ru/";
-//		fql = 'SELECT share_count FROM link_stat WHERE url="' + thisURL + '"';
-//		serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
-//		alert(serviceURL);
-//		resultURL = serviceURL// + thisURL;
-//		_this = this
-//		$.getJSON(resultURL,function(response){
-//			alert(response[0].share_count);
-//		});
-//	}	
-
-
-//=================================================================
-//Контейнеры социальных настроек
-//=================================================================
-
-var facebook_setting_obj = {
-	url_set_share: 'http://www.facebook.com/sharer/sharer.php?',
-	uid: "FB",
-}
-
-var twitter_setting_obj = {
-	url_set_share: 'https://twitter.com/share?',
-	uid: "TW",
-}
-
-var vkontakte_setting_obj = {
-	url_set_share: 'http://vkontakte.ru/share.php?',
-	url_get_share: 'http://vk.com/share.php?act=count&url=',
-	uid: "VK",
-}	
-//Контейнеры социальных настроек
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-//=================================================================
-//Костылек для Вконтакте
-//=================================================================
-
-var VK = {
-	count_value: 666,
-    Share: {
-        count: function(value, count) {
-            VK.count_value = count;
-        }
-    }
-}
-//Костылек для Вконтакте
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-function extend(Child, Parent) {
-	var F = function() { }
-	F.prototype = Parent.prototype
-	Child.prototype = new F()
-	Child.prototype.constructor = Child
-	Child.superclass = Parent.prototype
-}
-
-
-function new_share_constructor(){
-	this.url_params = "";
-	this.make_params = function(purl, ptitle, pimg, text){
-		url = "";
-		if (purl.length > 0) {
-			url += 'url=' + encodeURIComponent(purl);
-		}
-		if (ptitle.length > 0) {
-			url += '&title='       + encodeURIComponent(ptitle);
-		}
-		if (text.length > 0) {
-			url += '&description=' + encodeURIComponent(text);
-		}		
-		if (pimg.length > 0) {
-			url += '&image='       + encodeURIComponent(pimg);
-		}
-		this.url_params = url
-	}
-}
-
-function Provider(){
-	this.url_set_share= "default";
-	this.url_get_share = "default";
-	this.uid = "default";
-	this.shares_url = "default";//example mysite.rus
-	
-
-	this.alert_par = function(){
-		alert(this.uid);
-	}
-	this.share = function() {
-        url = this.url_set_share+this.url_params
-        popup_res=this.popup(url);
-    }
-  	this.popup = function(url) {
-  		//timer;
-        var w=window.open(url,'','toolbar=0,status=0,width=626,height=436');
-        win = w;
-    }
-    this.count_share = "default nothing";
-	this.elem_view = "default nothing"
-
-    this.getCountShare = function (){
-
-		var
-		_this = this;
-		switch (this.uid) {
-			case "VK":
-				$.getJSON(this.url_get_share+this.shares_url+"&callback=?", function(response){}).complete(function(  ) {
-						//TODO Проверка на существование переданного элеемнта - alert('Установите DOM для вывода значения') 
-						_this.elem_view.html(window.VK.count_value);			
-  					});				
-				break
-			case "FB":
-				fql = 'SELECT share_count FROM link_stat WHERE url="' + this.shares_url + '"';
-				serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
-				$.getJSON(resultURL,function(response){
-					alert(response[0].share_count);
-					_this.elem_view.html(response[0].share_count);
-
-				});
-				break
-			case "TW":
-				$.getJSON(this.url_get_share+this.shares_url,function(response){
-					alert(response.count);
-					_this.elem_view.html(response[0].share_count);
-
-				});
-				break
-			default:
-				alert('Других социальных сетей мы не знаем');									
-		}
-	}
-
-
-
-} 
-
-//======================================================
-//Секция инициализации
-//======================================================
-Provider.prototype =  new  new_share_constructor()//share_constructor()//Sharer
-
-vkontakte_obj = new Provider()
-vkontakte_obj.url_set_share= vkontakte_setting_obj.url_set_share;
-vkontakte_obj.url_get_share = vkontakte_setting_obj.url_get_share;
 vkontakte_obj.shares_url="<%= @url_vk %>";
-vkontakte_obj.uid = vkontakte_setting_obj.uid;
-
-facebook_obj = new Provider()
-facebook_obj.url_set_share= facebook_setting_obj.url_set_share;
-facebook_obj.url_get_share = facebook_setting_obj.url_get_share;
 facebook_obj.shares_url='http://newbattle.ru/';
-facebook_obj.uid = facebook_setting_obj.uid;
-
-twitter_obj = new Provider()
-twitter_obj.url_set_share= twitter_setting_obj.url_set_share;
-twitter_obj.url_get_share = twitter_setting_obj.url_get_share;
 twitter_obj.shares_url='http://newbattle.ru/';
-twitter_obj.uid = twitter_setting_obj.uid;
-
 //Секция инициализации
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 $(function(){
 	vkontakte_obj.make_params('<%= "#{@url_vk}" %>','<%= "#{@title_vk}" %>','<%= "#{@image_path_vk}" %>','<%= "#{@desc_vk}" %>')
@@ -277,14 +82,15 @@ $(function(){
 	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
 		<div class="span6 offset3" style="border: solid <%= "#{@border_div}" %>px">
 			<p class="lead" style="text-align:center">
-				Заголовок очередной битвы
+				<%= @buttle.name %>
 			</p>	
 		</div>		
 	</div>	
 	<div class="row-fluid" style="border: solid <%= "#{@border_div}" %>px">
 		<div class="span3 offset3" style="border: solid <%= "#{@border_div}" %>px">
 			<p class="lead" style="text-align:center">
-				<% logo = image_tag("battle/b-1.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250")%>
+				<%# logo = image_tag("battle/b-1.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250")%>
+				<% logo = image_tag(@buttle.opponent_first.image.url(:medium), :alt=>"Sample app", :class=>"img-rounded", :width=>"250")%>
 					<%= link_to logo, root_path, :class => "thumbnail", 
 												 :id => "b1",
 												 :rel=>"tooltip"%>
@@ -292,7 +98,8 @@ $(function(){
 		</div>	
 		<div class="span3" style="border: solid <%= "#{@border_div}" %>px">
 			<p class="lead" style="text-align:center">
-				<% logo = image_tag("battle/b-3.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250") %>
+				<%# logo = image_tag("battle/b-3.jpg", :alt=>"Sample app", :class=>"img-rounded", :width=>"250") %>
+				<% logo = image_tag(@buttle.opponent_second.image.url(:medium), :alt=>"Sample app", :class=>"img-rounded", :width=>"250") %>				
 					<%= link_to logo, root_path, :class => "thumbnail", :id => "b2", 
 												 :rel=>"tooltip" %>
 			</p>	
