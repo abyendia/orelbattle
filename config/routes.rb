@@ -1,14 +1,24 @@
 Battle::Application.routes.draw do
-
-  resources :buttles
-
-  resources :lots do
-    collection do       
-      get :one_lot
-    end
-    member do 
+  namespace :myadmin do
+    match "/" => "index#index"
+    resources :buttles  
+    resources :lots do
+      collection do       
+        get :one_lot
+      end
+      member do 
+      end  
     end  
   end  
+  
+    resources :buttles  
+    resources :lots do
+      collection do       
+        get :one_lot
+      end
+      member do 
+      end  
+    end    
 
   match "/home", :to => "pages#home"
   

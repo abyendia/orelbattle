@@ -59,4 +59,7 @@ module Battle
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
+  class Error403 < Exception; end
+  class Error404 < Exception; end      
+
 end

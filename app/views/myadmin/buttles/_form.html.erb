@@ -4,7 +4,7 @@
 
 
 <div class="row-fluid center-elem">
-<%= form_for(@buttle, :html => {:class => "form-horizontal"}) do |f| %>
+<%= form_for(@buttle, :url => myadmin_buttles_path,:html => {:class => "form-horizontal"}) do |f| %>
   <% if @buttle.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@buttle.errors.count, "error") %> prohibited this buttle from being saved:</h2>

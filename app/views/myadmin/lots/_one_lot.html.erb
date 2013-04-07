@@ -1,0 +1,44 @@
+<!-- Modal -->
+<script>
+var opponent_number = <%= opponent_number %> ;
+$(".select_opponent_class").click(function(){
+  $("#after_ajax_"+opponent_number).attr("value",$(this).attr("data_id"));
+  $("#img_after_ajax_"+opponent_number).html("<img src='"+$(this).attr("data_src")+"'>");
+  $('#myModal').modal('hide');
+});
+
+</script>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Список лотов</h3>
+  </div>
+  <div class="modal-body">
+
+    <table class="table table-striped">
+      <tr>
+        <th>Имя</th>
+        <th>Описание</th>
+        <th>Картинка</th>
+        <th></th>
+      </tr>
+    
+    <% @lots.each do |lot| %>
+      <tr>
+        <td><%= lot.name %></td>
+        <td><%= lot.description %></td>
+        <td><%= image_tag lot.image.url(:small), :class => "img-polaroid"  %></td>
+        <td>
+          <!--<a href="#" class="btn btn-info" id="select_opponent" data = "lot.id">a<a> -->
+          <%= link_to 'Выбрать', "#", :class => "btn btn-info select_opponent_class", :id => "select_opponent", :data_id => lot.id, :data_src => lot.image.url(:small) %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>

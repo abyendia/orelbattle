@@ -6,16 +6,16 @@ page_buttles = "Битвы"
 
 <div class="navigation_admin">
 <ul class="nav nav-pills pull-right">
-  <li <% if current_page? lots_path %> class="active" <% end %>     >
+  <li <% if current_page? myadmin_lots_path %> class="active" <% end %>     >
   	<%= 
-  	  link_to_unless_current(page_lots, lots_path) do 
+  	  link_to_unless_current(page_lots, myadmin_lots_path) do 
   	  	link_to(page_lots, "#")
   	  end	
   	%>
   </li>
-  <li  <% if current_page? buttles_path %> class="active" <% end %> >
+  <li  <% if current_page? myadmin_buttles_path %> class="active" <% end %> >
   	<%= 
-  	  link_to_unless_current(page_buttles, buttles_path) do 
+  	  link_to_unless_current(page_buttles, myadmin_buttles_path) do 
   	  	link_to(page_buttles, "#")
   	  end	
   	%>

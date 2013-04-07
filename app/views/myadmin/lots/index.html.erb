@@ -33,7 +33,7 @@
     </td>
     <td><%= image_tag lot.image.url(:small), :class => "img-polaroid"  %></td>
     <td><%= link_to 'Редактировать', edit_myadmin_lot_path(lot), :class => "btn btn-warning" %></td>
-    <td><%= link_to 'Удалить', lot, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger" %></td>
+    <td><%= link_to 'Удалить', myadmin_lot_path(lot), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger" %></td>
   </tr>
 <% end %>
 </table>

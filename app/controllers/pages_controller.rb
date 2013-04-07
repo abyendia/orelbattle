@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 		cookies[:battle] = Time.now
 		respond_to do |format|
 			format.html do 
-				render :layout => nil
+				#render :layout => nil
 			end	
 		end	
 	end	
