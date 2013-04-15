@@ -14,10 +14,15 @@ class PagesController < ApplicationController
   
 #@description1="ddsfcsdfs"
  
-   @url_vk = request.url#"http://qwertytestytrewq.ru/"
-   @title_vk = @buttle.name 
-   @image_path_vk = "http://localhost:3000/assets/decor/logo.jpg" 
-   @desc_vk = "this is test message, please give me to post them"
+   @shares_url = "http://qwertytestytrewq.ru/"#request.url#
+   @title = @buttle.name 
+   @image_path_vk = "http://localhost:3000/assets/decor/logo.jpg"
+
+   @image_voice_left = "http://#{request.host}:#{request.port}#{@buttle.opponent_first.image.url(:small)}"
+   @image_voice_right = "http://#{request.host}:#{request.port}#{@buttle.opponent_second.image.url(:small)}"
+   
+   
+   @desc = "this is test message this is test message this is test message"
 
 		respond_to do |format|
 			format.html do 

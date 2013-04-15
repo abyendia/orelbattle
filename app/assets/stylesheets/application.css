@@ -17,9 +17,20 @@ textarea {
   width: 350px !important;  
 }
 
-#share_left_vk{
+#share_vk_right{
 	cursor:pointer;
 }
+#share_vk_left{
+  cursor:pointer;
+}
+
+#share_tw_right{
+  cursor:pointer;
+}
+#share_tw_left{
+  cursor:pointer;
+}
+
 .my_line {
         line-height: 1.1;
         margin-top: 5%;

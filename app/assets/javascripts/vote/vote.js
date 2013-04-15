@@ -1,12 +1,14 @@
 var win= null;
 
 var facebook_setting_obj = {
-	url_set_share: 'http://www.facebook.com/sharer/sharer.php?',
+	//url_set_share: 'http://www.facebook.com/sharer/sharer.php?',
+	url_set_share: 'http://www.facebook.com/sharer.php?s=100',
 	uid: "FB",
 }
 
 var twitter_setting_obj = {
 	url_set_share: 'https://twitter.com/share?',
+	url_get_share:'http://urls.api.twitter.com/1/urls/count.json?url=',
 	uid: "TW",
 }
 
@@ -46,20 +48,98 @@ function extend(Child, Parent) {
 
 function new_share_constructor(){
 	this.url_params = "";
+
+	this.url_field   = "";
+	this.title_field = "";
+	this.img_field   = "";
+	this.text_field  = "";
+
 	this.make_params = function(purl, ptitle, pimg, text){
+
+	    this.url_field   = purl;
+	    this.title_field = ptitle;
+	    this.img_field   = pimg;
+	    this.text_field  = text;
+
 		url = "";
 		if (purl.length > 0) {
-			url += 'url=' + encodeURIComponent(purl);
+			if (this.uid == "FB") {
+				url += '&p[url]=' + encodeURIComponent(purl);
+			} else {
+			  	url += 'url=' + encodeURIComponent(purl);	
+			}
+
 		}
 		if (ptitle.length > 0) {
-			url += '&title='       + encodeURIComponent(ptitle);
+			if (this.uid == "FB") {
+				url += '&p[title]=' + encodeURIComponent(purl);
+			} else {			
+				url += '&title='       + encodeURIComponent(ptitle);
+			}	
 		}
 		if (text.length > 0) {
-			url += '&description=' + encodeURIComponent(text);
+			if (this.uid == "FB") {
+				url += '&p[summary]=' + encodeURIComponent(purl);
+			} else {			
+				url += '&description=' + encodeURIComponent(text);
+			}				
 		}		
 		if (pimg.length > 0) {
-			url += '&image='       + encodeURIComponent(pimg);
+			if (this.uid == "FB") {
+				url += '&p[images]=' + encodeURIComponent(purl);
+			} else {			
+				url += '&image='       + encodeURIComponent(pimg);
+			}	
 		}
+		this.url_params = url
+	}
+	this.change_params = function(purl, ptitle, pimg, text){
+
+		url = "";
+		if (this.uid == "FB") {
+			if (purl.length > 0) {
+				url += '&p[url]=' + encodeURIComponent(purl);
+			} else {
+				url += '&p[url]=' + encodeURIComponent(this.url_field);
+			}
+			if (ptitle.length > 0) {
+				url += '&p[title]=' + encodeURIComponent(ptitle);
+			} else {
+				url += '&p[title]=' + encodeURIComponent(this.title_field);
+			}
+			if (text.length > 0) {
+				url += '&p[summary]=' + encodeURIComponent(text);
+			} else {
+				url += '&p[summary]=' + encodeURIComponent(this.text_field);
+			}		
+			if (pimg.length > 0) {
+				url += '&p[images][0]=' + encodeURIComponent(pimg);
+			} else {
+				url += '&p[images][0]=' + encodeURIComponent(this.img_field);
+			}			
+
+		} else {
+			if (purl.length > 0) {
+				url += 'url=' + encodeURIComponent(purl);
+			} else {
+				url += 'url=' + encodeURIComponent(this.url_field);
+			}
+			if (ptitle.length > 0) {
+				url += '&title=' + encodeURIComponent(ptitle);
+			} else {
+				url += '&title=' + encodeURIComponent(this.title_field);
+			}
+			if (text.length > 0) {
+				url += '&description=' + encodeURIComponent(text);
+			} else {
+				url += '&description=' + encodeURIComponent(this.text_field);
+			}		
+			if (pimg.length > 0) {
+				url += '&image=' + encodeURIComponent(pimg);
+			} else {
+				url += '&image=' + encodeURIComponent(this.img_field);
+			}
+		}	
 		this.url_params = url
 	}
 }
@@ -100,16 +180,16 @@ function Provider(){
 			case "FB":
 				fql = 'SELECT share_count FROM link_stat WHERE url="' + this.shares_url + '"';
 				serviceURL = "https://api.facebook.com/method/fql.query?format=json&query="+fql;
-				$.getJSON(resultURL,function(response){
+				$.getJSON(serviceURL,function(response){
 					alert(response[0].share_count);
 					_this.elem_view.html(response[0].share_count);
 
 				});
 				break
 			case "TW":
-				$.getJSON(this.url_get_share+this.shares_url,function(response){
-					alert(response.count);
-					_this.elem_view.html(response[0].share_count);
+				console.log(this.url_get_share+this.shares_url);
+				$.getJSON(this.url_get_share+this.shares_url+"&callback=?",function(response){
+					_this.elem_view.html(response.count);
 
 				});
 				break
