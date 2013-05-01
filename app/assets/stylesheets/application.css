@@ -117,6 +117,14 @@ a.btn.btn-simple {
   width: 660px !important;
 }
 
+.count_voice_all {
+  font-size : 120px;
+}
+
+.p_count_voice_all {
+  margin-top: 40px;
+}
+
 /* Костыль - бутстрап не всегда отображает текст на кнопках белым*/
 
 /*

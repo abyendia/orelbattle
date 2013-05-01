@@ -19,7 +19,8 @@ Battle::Application.routes.draw do
       member do 
       end  
     end    
-
+  resources :votes, :only => :new  
+    
   match "/home", :to => "pages#home"
   
 

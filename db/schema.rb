@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326191413) do
+ActiveRecord::Schema.define(:version => 20130416173823) do
 
   create_table "buttles", :force => true do |t|
     t.integer  "opponent_1"
@@ -38,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20130326191413) do
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.string   "ip"
+    t.integer  "kind_of_vote", :default => 0
+    t.integer  "buttle_id"
+    t.integer  "lot_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
 end

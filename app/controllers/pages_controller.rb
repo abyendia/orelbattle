@@ -7,6 +7,9 @@ class PagesController < ApplicationController
   @border_div = 0
   @description1 = @buttle.opponent_first.description.to_s.squish
   @description2 =  @buttle.opponent_second.description.to_s.squish
+
+  @count_voite_left = @buttle.votes_first_opponent.size
+  @count_voite_right = @buttle.votes_second_opponent.size
   
   #@description2 = @description2.gsub(/\n/, " ")
 
@@ -23,6 +26,8 @@ class PagesController < ApplicationController
    
    
    @desc = "this is test message this is test message this is test message"
+
+   @guest_ip = request.remote_ip
 
 		respond_to do |format|
 			format.html do 
