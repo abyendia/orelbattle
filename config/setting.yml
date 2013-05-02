@@ -1,0 +1,8 @@
+development:
+  FACEBOOK_APP_ID: 123456789
+  site_domain: battle.ru
+  site_port: 3000
+test:
+ FACEBOOK_APP_ID: 987654321
+production:
+  FACEBOOK_APP_ID: 147258369

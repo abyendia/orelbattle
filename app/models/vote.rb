@@ -1,6 +1,7 @@
 include Utils 
 class Vote < ActiveRecord::Base
   # attr_accessible :title, :body
+  attr_accessible :buttle_id, :lot_id, :ip
   belongs_to :buttle
   belongs_to :lot
   #scope :one_kind_of_vote, :conditions => 'kind_of_vote = 1'

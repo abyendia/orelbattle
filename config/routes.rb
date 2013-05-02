@@ -1,4 +1,28 @@
 Battle::Application.routes.draw do
+  
+  resources :feedbacks
+
+  class ForRedirectFromGeneralPage 
+    def self.matches?(request)
+      #id_published = Buttle.where(:published => true).id;
+      return true
+    end  
+  end  
+#  get "/buttles/#{Buttle.where(:published => true).first.id}", :as => :root
+  constraints ForRedirectFromGeneralPage do
+    match "/" => redirect {| p,request | "/buttles/#{Buttle.in_general_page.id}" }
+    # root :to => "buttles#show", :id => Buttle.where(:published => true).first.id
+  end  
+
+  resources :buttles  
+  resources :lots do
+    collection do       
+      get :one_lot
+    end
+    member do 
+    end  
+  end
+
   namespace :myadmin do
     match "/" => "index#index"
     resources :buttles  
@@ -10,21 +34,16 @@ Battle::Application.routes.draw do
       end  
     end  
   end  
-  
-    resources :buttles  
-    resources :lots do
-      collection do       
-        get :one_lot
-      end
-      member do 
-      end  
-    end    
+      
+
   resources :votes, :only => :new  
     
   match "/home", :to => "pages#home"
   
 
   root :to => "pages#home"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

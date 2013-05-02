@@ -1,0 +1,14 @@
+<% if location == "left" %>
+	<%= button_to "Голосовать", new_vote_path(:buttle_id => buttle_id, :lot_id => lot_id, :location => location ), :remote=>true, :method => :get,
+							:class=>"btn btn-large btn-info voiceclass",
+							:id=>"voice_left",
+							:type=>"button",	
+							:rel=>"popover"		%>
+
+<% else %>
+	<%= button_to "Голосовать", new_vote_path(:buttle_id => buttle_id, :lot_id => lot_id, :location => location ), :remote=>true, :method => :get,
+							:class=>"btn btn-large btn-info voiceclass",
+							:id=>"voice_right",
+							:type=>"button",	
+							:rel=>"popover"		%>
+<% end %>

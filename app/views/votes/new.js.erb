@@ -1,2 +1,15 @@
-alert(<%= @buttle %>);
-alert(<%= @lot %>);
+//alert(<%= @buttle %>);
+//alert(<%= @lot %>);
+<% if params[:location] == "left" %>
+$("#voice_all_left").html("<%= @count_vote %>");
+$("#input_voice_left").html("<%= escape_javascript(render(:partial => 'pages/button_vote_disabled', :locals => {:location => 'left', :buttle_id => @buttle_id, :lot_id => @lot_id})) %>");
+//Дизеблим вторую кнопку голосования, т.к. в этой битве уже произошло голосование
+$("#input_voice_right").html("<%= escape_javascript(render(:partial => 'pages/button_vote_disabled', :locals => {:location => 'right', :buttle_id => @buttle_id, :lot_id => @lot_id_not_vote})) %>");
+<% else %>
+$("#voice_all_right").html("<%= @count_vote %>");
+$("#input_voice_right").html("<%= escape_javascript(render(:partial => 'pages/button_vote_disabled', :locals => {:location => 'right', :buttle_id => @buttle_id, :lot_id => @lot_id})) %>");
+//Дизеблим вторую кнопку голосования, т.к. в этой битве уже произошло голосование
+$("#input_voice_left").html("<%= escape_javascript(render(:partial => 'pages/button_vote_disabled', :locals => {:location => 'left', :buttle_id => @buttle_id, :lot_id => @lot_id_not_vote})) %>");
+<% end %>
+
+

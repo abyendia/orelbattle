@@ -12,9 +12,41 @@
  *= require_tree .
  */
 
+ span {
+    vertical-align: middle;
+    }
+
+ @font-face {
+ font: {
+     family: 'MonoCondensedC-Bold';
+     weight: 'normal';
+     style: 'normal';
+    }
+ src: asset-url('MonoCondensedC-Bold.otf', font) format('truetype');
+}
+
+body {
+  font-family: MonoCondensedC-Bold !important;
+  /*background-color: #F2F3F4 !important;*/
+}
+
+
 textarea {
   height: 150px !important;
   width: 350px !important;  
+}
+
+input[type="text"] {
+  height: 40px !important;
+}
+
+input[type="email"] {
+  height: 40px !important;
+}
+
+
+input[type="password"] {
+  height: 40px !important;
 }
 
 #share_vk_right{
@@ -39,7 +71,13 @@ textarea {
 .container-narrow {
         margin: 0 auto;
         max-width: 700px;
-      }      
+      }  
+
+.container-narrow-header {
+        margin: 0 auto;
+        max-width: 900px;
+      }  
+          
 .divcenter {
   margin-left: 30%;
 }

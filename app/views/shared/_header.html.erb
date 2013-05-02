@@ -1,0 +1,29 @@
+<%
+# named block
+page_general = "Битва"
+page_lists = "Список"
+page_feedback = "Отзыв"
+%>
+
+<div class="container-narrow-header">
+<div class="navbar">
+  <div class="navbar-inner ">
+    <div style="text-align:center">
+      <ul class="nav">
+        <li <% if current_page? buttle_path(Buttle.in_general_page.id) %> class="active" <% end %> >
+        	<%= link_to(page_general, root_path) %>
+        </li>
+        <li class="divider-vertical"></li>
+        <li <% if current_page? buttles_path %> class="active" <% end %> > 
+        	<%= link_to(page_lists, buttles_path) %>
+        </li>
+        <li class="divider-vertical"></li>
+        <li  <% if current_page? new_feedback_path %> class="active" <% end %> >
+        	<%= link_to(page_feedback, new_feedback_path) %>
+        </li>
+        <li class="divider-vertical"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
