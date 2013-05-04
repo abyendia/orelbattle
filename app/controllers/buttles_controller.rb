@@ -1,3 +1,5 @@
+require 'stamp'
+
 class ButtlesController < ApplicationController
   # GET /buttles
   # GET /buttles.json

@@ -13,15 +13,15 @@ page_feedback = "Отзыв"
         <li <% if current_page? buttle_path(Buttle.in_general_page.id) %> class="active" <% end %> >
         	<%= link_to(page_general, root_path) %>
         </li>
-        <li class="divider-vertical"></li>
+        <!--  <li class="divider-vertical"></li> -->
         <li <% if current_page? buttles_path %> class="active" <% end %> > 
         	<%= link_to(page_lists, buttles_path) %>
         </li>
-        <li class="divider-vertical"></li>
+        <!-- <li class="divider-vertical"></li>  -->
         <li  <% if current_page? new_feedback_path %> class="active" <% end %> >
         	<%= link_to(page_feedback, new_feedback_path) %>
         </li>
-        <li class="divider-vertical"></li>
+        <!-- <li class="divider-vertical"></li> -->
       </ul>
     </div>
   </div>

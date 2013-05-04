@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= render :partial => 'shared/head_script_social_vote', 
+<%= render :partial => 'shared/head_script_social_vote_strip', 
 		   :locals => {
 		   		:shares_url 		=> @shares_url,
 				:title 				=> @title,
@@ -41,6 +41,7 @@
 		<div class="span6">
 
 			<div id="input_voice_left" style="text-align:center">
+    									
 			  <% if @vote_access %>	
   			    <%= render :partial => 'button_vote', :locals => {
   			    	 								             :location => "left",
@@ -54,6 +55,8 @@
   			    	 								         	 :lot_id => @buttle.opponent_first.id
   			    	 								         	} %>
   			  <% end %>  
+
+
   			</div>							
 
 		</div>	
@@ -93,8 +96,28 @@
   				</span>
 			</p>	
 		</div>				
-	</div>		
+	</div>
+<br/>
 
+	<div class="row-fluid">
+		<div class="span6">
+			<p style="text-align:center" class="div_share">
+  				<span>		  
+	<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Facebook.png"  class="share_fb" id="share_fb_left" />
+	<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Twitter.png" class="share_tw" id="share_tw_left" />
+	<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Tumblr.png" class="share_vk" id="share_vk_left" />	
+  				</span>
+			</p>	
+		</div>	
+		<div class="span6">
+			<p style="text-align:center" class="div_share">
+  				<span>
 
-<%= link_to 'Edit', edit_myadmin_buttle_path(@buttle) %> |
-<%= link_to 'Back', myadmin_buttles_path %>
+	<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Facebook.png" class="share_fb" id="share_fb_right" />
+	<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Twitter.png" class="share_tw" id="share_tw_right" />
+	<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Tumblr.png" class="share_vk" id="share_vk_right" />
+  				</span>
+			</p>	
+		</div>				
+	</div>			
+

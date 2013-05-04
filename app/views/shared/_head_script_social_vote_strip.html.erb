@@ -1,0 +1,164 @@
+<script>
+
+
+vkontakte_obj.shares_url = "<%= shares_url %>";
+facebook_obj.shares_url  = "<%= shares_url %>";
+twitter_obj.shares_url   = "<%= shares_url %>";
+//Секция инициализации
+
+function init_popover() {
+
+  $("#voice_left").popover({ title: 'Воспользуйтесь соц.сетью', 
+  				html: 'true', 
+  				placement: 'left' ,
+  				content: soc_v_left+soc_t_left+soc_f_left });	
+  
+  $("#voice_right").popover({ title: 'Воспользуйтесь соц.сетью', 
+  				html: 'true', 
+  				placement: 'right' ,
+  				content: soc_v_right+soc_t_right+soc_f_right });	
+
+}
+
+
+$(function(){
+	vkontakte_obj.make_params(
+			'<%= "#{shares_url}" %>',
+			'<%= "#{title}" %>',
+			'<%= "#{image_voice_left}" %>',
+			'<%= "#{desc}" %>' );	
+
+	vkontakte_obj.elem_view= $('#vk_lot_left');
+
+	twitter_obj.make_params(
+			'<%= "#{shares_url}" %>',
+			'<%= "#{title}" %>',
+			'<%= "#{image_voice_left}" %>',
+			'<%= "#{desc}" %>' );
+
+	twitter_obj.elem_view= $('#tw_lot_left');	
+
+	facebook_obj.make_params(
+			'<%= "#{shares_url}" %>',
+			'<%= "#{title}" %>',
+			'<%= "#{image_voice_left}" %>',
+			'<%= "#{desc}" %>' );
+
+	facebook_obj.elem_view= $('#fb_lot_left');	
+
+
+	soc_f_left = '<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Facebook.png"  class="share_fb" id="share_fb_left" />';
+	soc_f_right = '<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Facebook.png" class="share_fb" id="share_fb_right" />';
+	soc_t_left  = '<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Twitter.png" class="share_tw" id="share_tw_left" />';
+	soc_t_right = '<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Twitter.png" class="share_tw" id="share_tw_right" />';
+	soc_v_left  = '<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Tumblr.png" class="share_vk" id="share_vk_left" />';
+	soc_v_right = '<img src="http://<%= APP_CONFIG['site_domain'] %>:<%= APP_CONFIG['site_port'] %>/assets/decor/Tumblr.png" class="share_vk" id="share_vk_right" />';	
+
+    //Init popover events. 
+    init_popover();		
+    //Run popover events
+	$(".voiceclass").click(function(){
+
+		switch ( $(this).attr("id") ) {
+		  case "voice_left":
+		  	placement_var = 'left';
+			$(this).popover({ title: 'Воспользуйтесь соц.сетью', 
+							html: 'true', 
+							placement: placement_var ,
+							content: soc_v_left+soc_t_left+soc_f_left });		  	
+		  	$("#voice_right").popover('destroy');
+			$("#voice_right").popover({ title: 'Воспользуйтесь соц.сетью', 
+							html: 'true', 
+							placement: 'right' ,
+							content: soc_v_right+soc_t_right+soc_f_right });		  	
+		  break
+		  default :
+		    placement_var = 'right';
+		    $(this).popover({ title: 'Воспользуйтесь соц.сетью', 
+							html: 'true', 
+							placement: placement_var ,
+							content: soc_v_right+soc_t_right+soc_f_right });
+		    $("#voice_left").popover('destroy');
+		    $("#voice_left").popover({ title: 'Воспользуйтесь соц.сетью', 
+							html: 'true', 
+							placement: 'left' ,
+							content: soc_v_left+soc_t_left+soc_f_left });
+  		  break	
+		}
+	})
+
+	$('.share_vk').live("click",function(){
+		if ($(this).attr("id") == "share_vk_left") {
+		  	vkontakte_obj.change_params('','','<%= "#{image_voice_left}" %>','' );
+		  	vkontakte_obj.elem_view= $('#vk_lot_left');
+		} else {
+			vkontakte_obj.change_params('','','<%= "#{image_voice_right}" %>','' );
+			vkontakte_obj.elem_view= $('#vk_lot_right');
+		}
+		vkontakte_obj.share();
+		var timer = setInterval(function () {
+ 		    if (win.closed){
+ 		      vkontakte_obj.getCountShare();
+ 		      setTimeout(function(){ 
+ 		      clearInterval(timer);
+ 		      win = null;
+ 		    } , 10);
+ 		  }
+ 		}, 20);
+ 	});
+
+	$('.share_tw').live("click",function(){
+		if ($(this).attr("id") == "share_tw_left") {
+		  	twitter_obj.change_params('','','<%= "#{image_voice_left}" %>','' );
+		  	twitter_obj.elem_view= $('#tw_lot_left');
+		} else {
+			twitter_obj.change_params('','','<%= "#{image_voice_right}" %>','' );
+			twitter_obj.elem_view= $('#tw_lot_right');
+		}
+		twitter_obj.share();
+		var timer = setInterval(function () {
+ 		    if (win.closed){
+ 		      twitter_obj.getCountShare();
+ 		      setTimeout(function(){ 
+ 		      clearInterval(timer);
+ 		      win = null;
+ 		    } , 10);
+ 		  }
+ 		}, 20);
+ 	});
+
+	$('.share_fb').live("click",function(){
+		if ($(this).attr("id") == "share_fb_left") {
+		  	facebook_obj.change_params('','','<%= "#{image_voice_left}" %>','' );
+		  	facebook_obj.elem_view= $('#fb_lot_left');
+		} else {
+			facebook_obj.change_params('','','<%= "#{image_voice_right}" %>','' );
+			facebook_obj.elem_view= $('#fb_lot_right');
+		}
+		facebook_obj.share();
+		var timer = setInterval(function () {
+ 		    if (win.closed){
+ 		      facebook_obj.getCountShare();
+ 		      setTimeout(function(){ 
+ 		      clearInterval(timer);
+ 		      win = null;
+ 		    } , 10);
+ 		  }
+ 		}, 20);
+ 	}); 	
+
+   
+ 	$('#b2').tooltip({ html: 'true', 
+ 					   title: '<p class="my_line desc_wrap mywrap"><%= description2 %></p>', 
+					   placement: 'right'});
+ 	$('#b1').tooltip({  title: '<p class="my_line desc_wrap mywrap"><%= description1 %></p>', 
+						html: 'true', 
+						placement: 'left',
+						trigger: 'hover' }	)
+
+ 	
+
+});
+
+
+</script>

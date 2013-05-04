@@ -49,6 +49,9 @@ input[type="password"] {
   height: 40px !important;
 }
 
+
+/*===============Социальные кнопки===============*/
+
 #share_vk_right{
 	cursor:pointer;
 }
@@ -62,6 +65,40 @@ input[type="password"] {
 #share_tw_left{
   cursor:pointer;
 }
+
+#share_fb_right{
+  cursor:pointer;
+}
+#share_fb_left{
+  cursor:pointer;
+}
+
+
+
+
+
+#share_vk_right:hover{
+  border: 2px solid Silver;
+}
+#share_vk_left:hover{
+  border: 2px solid Silver;
+}
+
+#share_tw_right:hover{
+  border: 2px solid Silver;
+}
+#share_tw_left:hover{
+  border: 2px solid Silver;
+}
+
+#share_fb_right:hover{
+  border: 2px solid Silver;
+}
+#share_fb_left:hover{
+  border: 2px solid Silver;
+}
+
+/*===============Социальные кнопки===============*/
 
 .my_line {
         line-height: 1.1;
@@ -161,6 +198,10 @@ a.btn.btn-simple {
 
 .p_count_voice_all {
   margin-top: 40px;
+}
+
+.div_share {
+  margin-top: 20px;
 }
 
 /* Костыль - бутстрап не всегда отображает текст на кнопках белым*/

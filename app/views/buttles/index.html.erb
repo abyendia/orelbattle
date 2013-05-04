@@ -1,28 +1,47 @@
+
+</script>
 <%#= render :partial => 'shared/admin_head' %>
 <div class="row-fluid center-elem update_big_elem">
     <h1>Битвы</h1>  
 </div>    
 <% @buttles.each do |buttle| %>
-<blockquote>
+<%
+#Для лота с меньшим количеством голосов красный цвет
+  if buttle.votes_first_opponent.size > buttle.votes_second_opponent.size
+    color_first = "green"  
+    color_second = "red"
+  else
+    color_first = "red"  
+    color_second = "green"
+  end  
+%>
 <div class="row-fluid">
-  <div class="span4">      
-    <p><span style="font-size: 40px"><%= link_to buttle.name, buttle %> </span>  </p><br/>
-    <small><%= buttle.created_at %></small>
+<blockquote>
+  <div class="span6">      
+    <p  style="line-height: 35px"><span style="font-size: 35px"><%= link_to buttle.name, buttle %> </span>  </p><br/>
+    <small>Дата создания: <%= buttle.created_at.stamp("Sunday, May 1, 2000") %></small>
   
   </div>
   <div class="span2">
     <%= image_tag(buttle.opponent_first.image.url(:medium), :alt=>"Sample app", :class=>"img-rounded", :width=>"80") %>
-    <small style="color: red"><%= buttle.votes_first_opponent.size %></small>
   </div>
   <div class="span2">
-      <p style="line-height: 100%;vertical-align:middle; font-size: 50px;">VS</p>
+      <p style="line-height: 100px; vertical-align:middle; font-size: 50px;">VS</p>
   </div>
   <div class="span2">
     <%= image_tag(buttle.opponent_second.image.url(:medium), :alt=>"Sample app", :class=>"img-rounded", :width=>"80") %>
-    <small style="color: blue"><%= buttle.votes_second_opponent.size %></small>
-  </div>    
-</div>
+  </div> 
+  <div class="row-fluid">
+      <div class="span2 offset6 ">
+        <small style="text-align: center; color: <%= color_first %> "><%= buttle.votes_first_opponent.size %></small>
+      </div> 
+      <div class="span2 offset2">
+        <small style="text-align: center; color:<%= color_second %> "><%= buttle.votes_second_opponent.size %></small>
+      </div>         
+  </div>   
 </blockquote>
+</div>
+<br/>
 <% end %>
 
 <br />
