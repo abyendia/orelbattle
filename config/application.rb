@@ -65,6 +65,7 @@ module Battle
     config.assets.version = '1.0'
 
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.i18n.default_locale = :ru
 
   end
   class Error403 < Exception; end

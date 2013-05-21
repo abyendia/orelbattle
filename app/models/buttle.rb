@@ -8,6 +8,8 @@ class Buttle < ActiveRecord::Base
 	has_many :votes_first_opponent, :class_name => "Vote", :conditions => proc {"votes.lot_id = #{opponent_first.id}"}
 	has_many :votes_second_opponent, :class_name => "Vote", :conditions => proc {"votes.lot_id = #{opponent_second.id}"}	
 
+	before_update :published_item_must_be_one, :if => Proc.new { published_changed? }
+
 	#scope :in_general_page, where(:published => true).first
 
 	#scope :count_vote_type_scope, :joins => :votes, :conditions => 'votes.type = 1'
@@ -17,7 +19,13 @@ class Buttle < ActiveRecord::Base
 #
 	#def count_vote_type(ptype=:none)
     #  votes.one_kind_of_vote(ptype).size
-	#end	
+	#end
+
+	def published_item_must_be_one
+	  if self.published
+	  	Buttle.where(:published => true).map{|item| item.update_attribute(:published, false)}
+	  end
+	end	
 
 	def self.in_general_page
 	   where(:published => true).first	

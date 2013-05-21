@@ -2,6 +2,9 @@
 # named block
 page_lots = "Лоты"
 page_buttles = "Битвы"
+page_feedbacks = "Фидбек пользователей"
+page_root = "На сайт"
+
 %>
 
 <div class="navigation_admin">
@@ -20,6 +23,22 @@ page_buttles = "Битвы"
   	  end	
   	%>
   </li>
+  <li  <% if current_page? myadmin_feedbacks_path %> class="active" <% end %> >
+    <%= 
+      link_to_unless_current(page_feedbacks, myadmin_feedbacks_path) do 
+        link_to(page_feedbacks, "#")
+      end 
+    %>
+  </li>
+  <li  <% if current_page? root_path %> class="active" <% end %> >
+    <%= 
+      link_to_unless_current(page_root, root_path) do 
+        link_to(page_root, "#")
+      end 
+    %>
+  </li>
+
+
   <li></li>
 </ul>
 </div>

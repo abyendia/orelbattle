@@ -1,0 +1,113 @@
+<div class="row-fluid center-elem">
+<h2>Список фидбека</h2>
+</div>
+
+<div class="row-fluid">
+  <div class="span3 offset9">
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        Массввые действия
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Поместить как прочитанные",  massmove_myadmin_feedbacks_path(:move => "read") %></li>
+        <li><%= link_to "Поместить как непрочитанные",  massmove_myadmin_feedbacks_path(:move => "not_read") %></li>
+        <!-- dropdown menu links -->
+      </ul>
+    </div>
+  </div>
+</div>  
+
+<% @feedbacks.each do |feedback| %>
+<div class="row-fluid">
+<blockquote>	
+  <div class="row-fluid">
+  	<div class="span6">
+  		<p class="label label-info"> Имя: </p>
+        <span class="lead">
+  		<%=feedback.name %>
+  		</span>  		  
+  	</div>	
+  </div>
+  <div class="row-fluid">
+  	<div class="span6 ">
+  		<p class="label label-info">
+  		Мыло: </p> 
+  		<span class="lead">
+  		<%=feedback.email %>
+  		</span>
+  	</div>	
+  </div>
+
+<style>
+.read_feedback_message {
+  cursor: pointer;
+}
+</style>
+
+<script>
+$(function(){
+  $(".read_feedback_message").mouseenter(function(){
+    $(this).css("border","solid 2px lightsteelblue");
+  });
+  $(".read_feedback_message").mouseleave(function(){
+    $(this).css("border","solid 0px lightsteelblue");
+  })  
+  $(".read_feedback_message").click(function(){    
+    id = $(this).attr("id");
+    //$(this).html("123");
+    _this = $(this)
+    $.ajax({
+        type: "POST",
+        url: "<%= to_read_message_myadmin_feedback_path(':id') %>".replace(":id", id),
+        success: function(data){
+          if (data.result == 'ok') {
+            _this.html('<p class="label label-info">Прочитано?: </p> <span class="lead">Да</span>');
+          } else {
+            alert('Что-то не так');
+          }
+        }
+      });
+  })
+})
+</script>  
+
+  <div class="row-fluid">
+    <div class="span6 read_feedback_message" id="<%= feedback.id %>">
+      <% if feedback.read %>
+        <p class="label label-info">Прочитано?: </p> 
+        <span class="lead">Да</span>
+      <% else %>
+        <p class="label label-important">Прочитано?: </p> 
+        <span class="lead">Нет</span>      
+      <% end %>
+    </div>  
+  </div>  
+
+  <br/>
+  <div class="row-fluid">
+  	<div class="span12" style="border: 4px solid lightsteelblue; margin: 5px; padding: 10px " >
+     <!-- <p class="label label-info">Сообщение:</p> -->
+      <small>
+      <%=feedback.message %>
+  	  </small>
+  	</div>	
+  </div>
+  <br/>
+
+</blockquote>  	
+  <div class="row-fluid">
+    <div class="span3 offset2">
+      [<%= link_to "Открыть", myadmin_feedback_path(feedback) %>] 
+    </div>  
+    <div class="span3">
+      [<%= link_to  "Обновить", myadmin_feedback_path(feedback), :method => :put %>]  
+    </div>  
+    <div class="span3">
+      [<%= link_to "Удалить", myadmin_feedback_path(feedback), :method => :delete %>]
+    </div>          
+  </div>
+</div>  		
+
+<% end %>
+

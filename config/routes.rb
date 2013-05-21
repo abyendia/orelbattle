@@ -1,6 +1,10 @@
 Battle::Application.routes.draw do
   
-  resources :feedbacks
+  resources :feedbacks, :only => [:new, :create] do
+    collection do
+      get :thank_you
+    end  
+  end  
 
   class ForRedirectFromGeneralPage 
     def self.matches?(request)
@@ -25,7 +29,16 @@ Battle::Application.routes.draw do
 
   namespace :myadmin do
     match "/" => "index#index"
-    resources :buttles  
+    resources :buttles
+    resources :feedbacks do
+      member do 
+        post :to_read_message
+      end  
+      collection do
+        get :massmove
+      end  
+    end  
+
     resources :lots do
       collection do       
         get :one_lot

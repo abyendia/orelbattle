@@ -1,10 +1,14 @@
+#encoding: utf-8
 require 'stamp'
+
+require 'new_will_paginate'
 
 class ButtlesController < ApplicationController
   # GET /buttles
   # GET /buttles.json
   def index
-    @buttles = Buttle.all
+
+    @buttles = Buttle.paginate(:page => params[:page] || 1, :per_page => 3)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,14 +26,23 @@ class ButtlesController < ApplicationController
    # @buttle = Buttle.first
     
     @border_div = 0
-    @description1 = @buttle.opponent_first.description.to_s.squish
+
+    @description1 =  @buttle.opponent_first.description.to_s.squish
     @description2 =  @buttle.opponent_second.description.to_s.squish
+
+    @description1_for_share =  "1"#{}"По-моему круче: #{@buttle.opponent_first.name}"
+    @description2_for_share =  "2"#{}"По-моему круче: #{@buttle.opponent_second.name}"    
   
+    @desc = "Simple test text"
+    @desc_left = "#{@buttle.name}. Мой выбор: #{@buttle.opponent_first.name}"
+    @desc_right = "#{@buttle.name}. Мой выбор: #{@buttle.opponent_second.name}"
+
+
     @count_voite_left = @buttle.votes_first_opponent.size
     @count_voite_right = @buttle.votes_second_opponent.size
 
-    @shares_url = "http://qwertytestytrewq.ru/"#request.url#
-    @title = @buttle.name 
+    @shares_url = "http://qwertytestytrewq.ru/privet/4"#request.url#
+    @title = "Битвы Орла"#@buttle.name 
     @image_path_vk = "http://localhost:3000/assets/decor/logo.jpg"
  
     @image_voice_left = "http://#{request.host}:#{request.port}#{@buttle.opponent_first.image.url(:small)}"
@@ -43,7 +56,7 @@ class ButtlesController < ApplicationController
  
     @vote_access = @buttle.access_vote(@guest_ip)
 
-    @desc = "this is test message this is test message this is test message"
+    
 
 
     respond_to do |format|

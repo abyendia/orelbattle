@@ -3,6 +3,7 @@
 page_general = "Битва"
 page_lists = "Список"
 page_feedback = "Отзыв"
+page_admin = "Админка"
 %>
 
 <div class="container-narrow-header">
@@ -22,6 +23,11 @@ page_feedback = "Отзыв"
         	<%= link_to(page_feedback, new_feedback_path) %>
         </li>
         <!-- <li class="divider-vertical"></li> -->
+        <% if Rails.env.development? %>
+        <li  <% if current_page? myadmin_path %> class="active" <% end %> >
+          <%= link_to(page_admin, myadmin_path) %>
+        </li>        
+        <% end %>
       </ul>
     </div>
   </div>

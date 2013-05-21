@@ -1,8 +1,9 @@
-class FeedbacksController < ApplicationController
+class Myadmin::FeedbacksController < Myadmin::ApplicationController
   # GET /feedbacks
   # GET /feedbacks.json
   def index
     #@feedbacks = Feedback.all
+    @feedbacks = Feedback.no_read
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,22 @@ class FeedbacksController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @feedbacks }
     end
+  end  
+
+  def to_read_message
+    feedback_item = Feedback.find(params[:id])
+    feedback_item.update_attribute(:read, true)
+    render :json => {:result => "ok"}
+  end
+
+  def massmove
+    Feedback.all.map{|item|item.update_attribute(:read, true)} if params[:move] == "read"
+    Feedback.all.map{|item|item.update_attribute(:read, false)} if params[:move] == "not_read"
+
+    respond_to do |format|
+      format.html { redirect_to myadmin_feedbacks_url}
+    end  
+
   end  
 
   # GET /feedbacks/1
@@ -53,7 +70,7 @@ class FeedbacksController < ApplicationController
 
     respond_to do |format|
       if @feedback.save
-        format.html { redirect_to thank_you_feedbacks_path, notice: 'Feedback was successfully created.' }
+        format.html { redirect_to myadmin_thank_you_feedbacks_path, notice: 'Feedback was successfully created.' }
         format.json { render json: @feedback, status: :created, location: @feedback }
       else
         format.html { render action: "new" }
@@ -85,7 +102,7 @@ class FeedbacksController < ApplicationController
     @feedback.destroy
 
     respond_to do |format|
-      format.html { redirect_to feedbacks_url }
+      format.html { redirect_to myadmin_feedbacks_url }
       format.json { head :no_content }
     end
   end

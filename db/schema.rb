@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502112144) do
+ActiveRecord::Schema.define(:version => 20130509075233) do
 
   create_table "buttles", :force => true do |t|
     t.integer  "opponent_1"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20130502112144) do
     t.string   "email",      :default => ""
     t.string   "theme",      :default => ""
     t.text     "message"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "read",       :default => false
   end
 
   create_table "lots", :force => true do |t|

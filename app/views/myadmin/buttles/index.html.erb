@@ -16,6 +16,7 @@
     </th>
     <th>Первый оппонент</th>
     <th>Второй оппонент</th>        
+    <th>На главной</th>
     <th></th>
     <th></th>
   </tr>
@@ -42,7 +43,12 @@
       <div class="center-elem">
         <%= image_tag buttle.opponent_second.image(:small) if buttle.opponent_second %>
       </div>
-    </td>    
+    </td>
+    <td>
+      <div class="center-elem">
+        <%= buttle.published? ? "Да" : "Нет" %>
+      </div>
+    </td>        
 
     <td><%= link_to 'Редактировать', edit_myadmin_buttle_path(buttle), :class=>"btn btn-warning " %></td>
     <td><%= link_to 'Удалить', myadmin_buttle_path(buttle), :method => :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>

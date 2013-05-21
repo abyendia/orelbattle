@@ -5,10 +5,12 @@
 		   		:shares_url 		=> @shares_url,
 				:title 				=> @title,
 				:desc 				=> @desc,
+				:desc_left          => @desc_left, 
+				:desc_right         => @desc_right,				
 				:image_voice_left 	=> @image_voice_left,
 				:image_voice_right  => @image_voice_right,
-				:description1 		=> @description1,
-				:description2 		=> @description2
+				:description1 		=> @description1_for_share,
+				:description2 		=> @description2_for_share
     				  } 
 %>
 <%= render :partial => 'shared/head_general' %>
@@ -21,6 +23,9 @@
 	</div>	
 	<div class="row-fluid">
 		<div class="span6">
+			<p class="lead" style="text-align:center">
+				<%= @buttle.opponent_first.name %>
+			</p>	
 			<p class="leads" style="text-align:center">
 				<% logo = image_tag(@buttle.opponent_first.image.url(:medium), :alt=>"Sample app", :class=>"img-rounded", :width=>"200")%>
 					<%= link_to logo, root_path, :class => "thumbnail", 
@@ -29,6 +34,9 @@
 			</p>
 		</div>	
 		<div class="span6">
+			<p class="lead" style="text-align:center">
+				<%= @buttle.opponent_second.name %>
+			</p>				
 			<p class="lead" style="text-align:center">
 				<% logo = image_tag(@buttle.opponent_second.image.url(:medium), :alt=>"Sample app", :class=>"img-rounded", :width=>"200") %>				
 					<%= link_to logo, root_path, :class => "thumbnail", :id => "b2", 
