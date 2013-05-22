@@ -23,8 +23,8 @@ test:
   timeout: 5000
 
 production:
-  adapter: pg
-  database: vector
+  adapter: postgresql
+  database: battle
   user: root
   password: user
   pool: 5
