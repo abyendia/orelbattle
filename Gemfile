@@ -7,7 +7,7 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-gem 'mysql2'
+gem 'mysql2',:group => [:development, :test]
 gem "paperclip", "~> 3.0"
 gem 'debugger'
 gem 'stamp'

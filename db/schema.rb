@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509075233) do
+ActiveRecord::Schema.define(:version => 20130521193220) do
 
   create_table "buttles", :force => true do |t|
     t.integer  "opponent_1"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20130509075233) do
     t.integer  "opp_voice_vk_1", :default => 0
     t.integer  "opp_voice_vk_2", :default => 0
     t.boolean  "published",      :default => false
+    t.datetime "from",           :default => '2012-11-22 19:34:30'
+    t.datetime "to",             :default => '2013-11-17 19:34:30'
   end
 
   create_table "cooks", :force => true do |t|

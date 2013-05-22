@@ -23,7 +23,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql2
+  adapter: pg
   database: vector
   user: root
   password: user
