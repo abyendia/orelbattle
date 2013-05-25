@@ -15,7 +15,7 @@
  span {
     vertical-align: middle;
     }
-
+/*
  @font-face {
  font: {
      family: 'MonoCondensedC-Bold';
@@ -24,6 +24,7 @@
     }
  src: asset-url('MonoCondensedC-Bold.otf', font) format('truetype');
 }
+*/
 
 body {
   font-family: MonoCondensedC-Bold !important;
