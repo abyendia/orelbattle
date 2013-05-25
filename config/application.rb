@@ -67,6 +67,8 @@ module Battle
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.i18n.default_locale = :ru
 
+    config.assets.precompile += %w( *.js *.css )
+
   end
   class Error403 < Exception; end
   class Error404 < Exception; end      
