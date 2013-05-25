@@ -21,6 +21,12 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
+#group :production do
+  gem  'activerecord-postgresql-adapter'	
+  gem 'pg'#, '0.12.2'
+#end
+
+
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -32,10 +38,7 @@ group :test do
  gem "factory_girl_rails", '~> 1.7.0'
 end	
 
-#group :production do
-  gem  'activerecord-postgresql-adapter'	
-  gem 'pg', '0.12.2'
-#end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(:version => 20130521193220) do
     t.integer  "opp_voice_vk_1", :default => 0
     t.integer  "opp_voice_vk_2", :default => 0
     t.boolean  "published",      :default => false
-    t.datetime "from",           :default => '2012-11-22 19:34:30'
-    t.datetime "to",             :default => '2013-11-17 19:34:30'
+    t.datetime "from",           :default => '2012-11-26 10:52:54'
+    t.datetime "to",             :default => '2013-11-21 10:52:54'
   end
 
   create_table "cooks", :force => true do |t|
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20130521193220) do
     t.string   "name",       :default => ""
     t.string   "email",      :default => ""
     t.string   "theme",      :default => ""
-    t.text     "message"
+    t.text     "message",    :default => ""
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "read",       :default => false
