@@ -49,7 +49,12 @@ class ButtlesController < ApplicationController
     @image_voice_right = "http://#{request.host}:#{request.port}#{@buttle.opponent_second.image.url(:small)}"
     
     
-    @guest_ip = '127.0.0.4'#request.remote_ip 
+    #OUT_BECAUSE_DRY
+    if consider_ip_set = Option.find_by_param("consider_ip")
+      @guest_ip = consider_ip_set.value == "true" ? request.remote_ip.to_s : "127.0.0.2"  
+    else
+      @guest_ip = APP_CONFIG['consider_ip'] == "true" ? request.remote_ip.to_s : "127.0.0.2"  
+    end  
  
     @vote_access_left =  @buttle.access_vote_first_opponent(@guest_ip)
     @vote_access_right = @buttle.access_vote_second_opponent(@guest_ip)

@@ -4,6 +4,7 @@ page_lots = "Лоты"
 page_buttles = "Битвы"
 page_feedbacks = "Фидбек пользователей"
 page_root = "На сайт"
+page_options_name = "Опции"
 
 %>
 
@@ -30,13 +31,20 @@ page_root = "На сайт"
       end 
     %>
   </li>
+  <li  <% if current_page? myadmin_options_path %> class="active" <% end %> >
+    <%= 
+      link_to_unless_current(page_options_name, myadmin_options_path) do 
+        link_to(page_options_name, "#")
+      end 
+    %>
+  </li>
   <li  <% if current_page? root_path %> class="active" <% end %> >
     <%= 
       link_to_unless_current(page_root, root_path) do 
         link_to(page_root, "#")
       end 
     %>
-  </li>
+  </li>  
 
 
   <li></li>

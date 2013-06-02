@@ -24,8 +24,10 @@ class PagesController < ApplicationController
    @image_voice_left = "http://#{request.host}:#{request.port}#{@buttle.opponent_first.image.url(:small)}"
    @image_voice_right = "http://#{request.host}:#{request.port}#{@buttle.opponent_second.image.url(:small)}"
    
-   
-   @guest_ip = '127.0.0.4'#request.remote_ip 
+
+   #@guest_ip = '127.0.0.4'#request.remote_ip 
+
+   @guest_ip = request.remote_ip 
 
    @vote_access_left = @buttle.access_vote_first_opponent(@guest_ip)
    @vote_access_right = @buttle.access_vote_second_opponent(@guest_ip)

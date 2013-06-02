@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521193220) do
+ActiveRecord::Schema.define(:version => 20130602091708) do
 
   create_table "buttles", :force => true do |t|
     t.integer  "opponent_1"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(:version => 20130521193220) do
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
+  end
+
+  create_table "options", :force => true do |t|
+    t.string   "param",      :limit => 32, :null => false
+    t.string   "value",      :limit => 32
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "votes", :force => true do |t|

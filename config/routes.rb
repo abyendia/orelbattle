@@ -1,5 +1,7 @@
 Battle::Application.routes.draw do
   
+  
+
   resources :feedbacks, :only => [:new, :create] do
     collection do
       get :thank_you
@@ -46,6 +48,16 @@ Battle::Application.routes.draw do
       member do 
       end  
     end  
+
+    resources :options do
+      member do
+        post :quick_update
+      end  
+      collection do
+        get :massmove
+      end  
+    end  
+
   end  
       
 
