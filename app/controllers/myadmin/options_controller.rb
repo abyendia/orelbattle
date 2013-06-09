@@ -3,7 +3,7 @@ class Myadmin::OptionsController < Myadmin::ApplicationController
   # GET /options.json
   def index
     @options = Option.all
-
+    @ip = request.remote_ip
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @options }
