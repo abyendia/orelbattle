@@ -56,7 +56,7 @@ class Buttle < ActiveRecord::Base
 	def access_vote(ip)
 		has_vote_1 = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_first.id, :ip => ip).first
 		has_vote_2 = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_second.id, :ip => ip).first
-		return true if has_vote_1.nil? && has_vote_1.nil? 
+		return true if has_vote_1.nil? && has_vote_2.nil? 
 		if has_vote_1
 		  return true if Time.now.to_i - has_vote_1.updated_at.to_i > 1.hour.to_i
 		end
