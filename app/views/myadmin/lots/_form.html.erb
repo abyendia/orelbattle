@@ -1,5 +1,5 @@
 <div class="row-fluid center-elem ">
-<%= form_for(@lot, :html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
+<%= form_for(@lot, :url => @lot.new_record? ? myadmin_lots_path : myadmin_lot_path ,:html => {:multipart => true, :class => "form-horizontal"}) do |f| %>
   <% if @lot.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lot.errors.count, "error") %> prohibited this lot from being saved:</h2>

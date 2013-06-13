@@ -21,13 +21,14 @@ Battle::Application.routes.draw do
   end  
 
   resources :buttles  
-  resources :lots do
-    collection do       
-      get :one_lot
-    end
-    member do 
-    end  
-  end
+  #Лоты доступны только через админку
+  #resources :lots do
+  #  collection do       
+  #    get :one_lot
+  #  end
+  #  member do 
+  #  end  
+  #end
 
   namespace :myadmin do
     match "/" => "index#index"
