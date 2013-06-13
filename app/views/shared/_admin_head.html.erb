@@ -5,6 +5,7 @@ page_buttles = "Битвы"
 page_feedbacks = "Фидбек пользователей"
 page_root = "На сайт"
 page_options_name = "Опции"
+page_votes_name = "Голоса"
 
 %>
 
@@ -38,6 +39,15 @@ page_options_name = "Опции"
       end 
     %>
   </li>
+
+  <li  <% if current_page? myadmin_votes_path %> class="active" <% end %> >
+    <%= 
+      link_to_unless_current(page_votes_name, myadmin_votes_path) do 
+        link_to(page_votes_name, "#")
+      end 
+    %>
+  </li>
+
   <li  <% if current_page? root_path %> class="active" <% end %> >
     <%= 
       link_to_unless_current(page_root, root_path) do 

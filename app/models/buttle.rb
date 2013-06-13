@@ -53,6 +53,8 @@ class Buttle < ActiveRecord::Base
 		return false  
 	end	
 
+	Vote.where(:buttle_id => Buttle.find(1).id, :lot_id => Buttle.find(1).opponent_first.id, :ip => "127.0.0.1").first
+
 	def access_vote(ip)
 		has_vote_1 = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_first.id, :ip => ip).first
 		has_vote_2 = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_second.id, :ip => ip).first

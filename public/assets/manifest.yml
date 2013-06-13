@@ -10,7 +10,7 @@ decor/Twitter.png: decor/Twitter-5120fe7074a5a32c0c0aa253c7eb7490.png
 decor/logo.jpg: decor/logo-dda997a58db3cc7ec2e77d93adae9e1e.jpg
 rails.png: rails-be8732dac73d845ac5b142c8fb5f9fb0.png
 scaffolds.css: scaffolds-0149f820dbdd285aa65e241569d8c256.css
-application.js: application-f75e6d4d7a5962f342c81bf6cc4521a1.js
+application.js: application-bd3aac72d3fc139837595408f4297808.js
 bootstrap.file-input.js: bootstrap.file-input-172ce9a63fa2c73c23bf01d70472bcf4.js
 bootstrap.js: bootstrap-25fa5ca33ab1ba2b1eb4c6f5a575f04b.js
 bootstrap.min.js: bootstrap.min-02b3b58267fe93d2056319e52934c3f8.js
@@ -18,15 +18,17 @@ buttles.js: buttles-6b251b16e709671b9df4b1f16a015d49.js
 feedbacks.js: feedbacks-6b251b16e709671b9df4b1f16a015d49.js
 jquery-1.8.3.js: jquery-1.8.3-782452a4bcef5ab8b2cff32a1ce237ff.js
 lots.js: lots-6b251b16e709671b9df4b1f16a015d49.js
+options.js: options-6b251b16e709671b9df4b1f16a015d49.js
 pages.js: pages-7270767b2a9e9fff880aa5de378ca791.js
 vote/vote.js: vote/vote-38814f6e408e6f1e8dd523291467ca6e.js
 _bootstrap.min.css: _bootstrap.min-ca86e1e4bf92d47af0707c930352dd92.css
-application.css: application-abab657344503744c3392413574e46a7.css
+application.css: application-bef411715b069be02d4e84f00ce2c1e2.css
 bootstrap.css: bootstrap-7840980dd2f081d850a10697d66621ec.css
 bootstrap.min.css: bootstrap.min-ca86e1e4bf92d47af0707c930352dd92.css
 buttles.css: buttles-7270767b2a9e9fff880aa5de378ca791.css
 feedbacks.css: feedbacks-7270767b2a9e9fff880aa5de378ca791.css
 lots.css: lots-7270767b2a9e9fff880aa5de378ca791.css
+options.css: options-7270767b2a9e9fff880aa5de378ca791.css
 pages.css: pages-7270767b2a9e9fff880aa5de378ca791.css
 jquery-ui.js: jquery-ui-b0be09708378a81986db2465f152a9ed.js
 jquery-ui.min.js: jquery-ui.min-7114ffba9a5c1299593aff4af8094c7f.js

@@ -1,0 +1,17 @@
+<!--  style="border: 2px solid Silver" -->
+<div class="row-fluid center-elem">
+	<div class="span4 color_border_grey"> 
+	Фильтр голосов:
+	</div>
+
+</div>
+<% @all_votes.each do |item| %>
+	<p>
+	  <ul>
+	    <li><%= item.ip %>
+	    <li><%= item.buttle.name %>
+	    <li><%= image_tag item.lot.image(:small) %>
+	    <li><%= item.updated_at %>
+	  </ul>
+	</p>
+<% end %>	

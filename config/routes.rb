@@ -58,7 +58,9 @@ Battle::Application.routes.draw do
       end  
     end  
 
-  end  
+    get '/votes' => 'votes#all'
+
+  end  #myadmin
       
 
   resources :votes, :only => :new  

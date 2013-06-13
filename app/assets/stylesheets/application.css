@@ -205,6 +205,10 @@ a.btn.btn-simple {
   margin-top: 20px;
 }
 
+.color_border_grey{
+  border: 2px solid Silver;
+}
+
 /* Костыль - бутстрап не всегда отображает текст на кнопках белым*/
 
 /*
