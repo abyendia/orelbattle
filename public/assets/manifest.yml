@@ -1,6 +1,5 @@
 ---
 MonoCondensedC-Bold.otf: MonoCondensedC-Bold-d71ea60894752b4c7ed9f2db5ce90071.otf
-_scaffolds.css: _scaffolds-0149f820dbdd285aa65e241569d8c256.css
 battle/b-1.jpg: battle/b-1-480e9b859c25f41825c4a248ba3a266f.jpg
 battle/b-2.jpg: battle/b-2-4b6712cf4a900ed7adb3db56b69774b8.jpg
 battle/b-3.jpg: battle/b-3-9d76f00695ffcb439fc14aa6bc52b860.jpg
@@ -9,7 +8,6 @@ decor/Tumblr.png: decor/Tumblr-a3167de83d126d1be09bb1b638f607b6.png
 decor/Twitter.png: decor/Twitter-5120fe7074a5a32c0c0aa253c7eb7490.png
 decor/logo.jpg: decor/logo-dda997a58db3cc7ec2e77d93adae9e1e.jpg
 rails.png: rails-be8732dac73d845ac5b142c8fb5f9fb0.png
-scaffolds.css: scaffolds-0149f820dbdd285aa65e241569d8c256.css
 application.js: application-bd3aac72d3fc139837595408f4297808.js
 bootstrap.file-input.js: bootstrap.file-input-172ce9a63fa2c73c23bf01d70472bcf4.js
 bootstrap.js: bootstrap-25fa5ca33ab1ba2b1eb4c6f5a575f04b.js
@@ -22,7 +20,7 @@ options.js: options-6b251b16e709671b9df4b1f16a015d49.js
 pages.js: pages-7270767b2a9e9fff880aa5de378ca791.js
 vote/vote.js: vote/vote-38814f6e408e6f1e8dd523291467ca6e.js
 _bootstrap.min.css: _bootstrap.min-ca86e1e4bf92d47af0707c930352dd92.css
-application.css: application-bef411715b069be02d4e84f00ce2c1e2.css
+application.css: application-9e97d9844871414b08cdaeb7ea2e6566.css
 bootstrap.css: bootstrap-7840980dd2f081d850a10697d66621ec.css
 bootstrap.min.css: bootstrap.min-ca86e1e4bf92d47af0707c930352dd92.css
 buttles.css: buttles-7270767b2a9e9fff880aa5de378ca791.css
