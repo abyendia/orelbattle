@@ -1,5 +1,6 @@
 include Utils 
 class Vote < ActiveRecord::Base
+
   # attr_accessible :title, :body
   attr_accessible :buttle_id, :lot_id, :ip
   belongs_to :buttle
