@@ -60,8 +60,8 @@ class ButtlesController < ApplicationController
     @vote_access_right = @buttle.access_vote_second_opponent(@guest_ip)
  
     @vote_access = @buttle.access_vote(@guest_ip)
-
     
+
 
     
 

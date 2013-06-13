@@ -41,7 +41,7 @@ class Buttle < ActiveRecord::Base
 	def access_vote_first_opponent(ip)
 		has_vote = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_first.id, :ip => ip).first
 		return true if has_vote.nil?
-		return true if Time.now.to_i - has_vote.updated_at.to_i > 1.hour.to_i
+		return true if Time.now.to_i - has_vote.updated_at.to_i+4.hour.to_i > 1.hour.to_i
 		return false  
 	end
 
@@ -49,21 +49,21 @@ class Buttle < ActiveRecord::Base
 	def access_vote_second_opponent(ip)
 		has_vote = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_second.id, :ip => ip).first
 		return true if has_vote.nil?
-		return true if Time.now.to_i - has_vote.updated_at.to_i > 1.hour.to_i
+		return true if Time.now.to_i - has_vote.updated_at.to_i+4.hour.to_i > 1.hour.to_i
 		return false  
 	end	
 
-	Vote.where(:buttle_id => Buttle.find(1).id, :lot_id => Buttle.find(1).opponent_first.id, :ip => "127.0.0.1").first
+	#Vote.where(:buttle_id => Buttle.find(1).id, :lot_id => Buttle.find(1).opponent_first.id, :ip => "127.0.0.1").first
 
 	def access_vote(ip)
 		has_vote_1 = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_first.id, :ip => ip).first
 		has_vote_2 = Vote.where(:buttle_id => self.id, :lot_id => self.opponent_second.id, :ip => ip).first
 		return true if has_vote_1.nil? && has_vote_2.nil? 
 		if has_vote_1
-		  return true if Time.now.to_i - has_vote_1.updated_at.to_i > 1.hour.to_i
+		  return false if Time.now.to_i - has_vote_1.updated_at.to_i+4.hour.to_i < 1.hour.to_i
 		end
 		if has_vote_2
-		  return true if Time.now.to_i - has_vote_2.updated_at.to_i > 1.hour.to_i
+		  return false if Time.now.to_i - has_vote_2.updated_at.to_i+4.hour.to_i < 1.hour.to_i
 		end		  
 		return false  
 	end								
