@@ -1,3 +1,4 @@
+adress in heroku: http://aqueous-sea-1685.herokuapp.com/
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
