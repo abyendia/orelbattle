@@ -9,7 +9,6 @@ class ButtlesController < ApplicationController
   def index
 
     @buttles = Buttle.paginate(:page => params[:page] || 1, :per_page => 3)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @buttles }

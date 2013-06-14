@@ -10,7 +10,7 @@ Battle::Application.routes.draw do
 
   class ForRedirectFromGeneralPage 
     def self.matches?(request)
-      #id_published = Buttle.where(:published => true).id;
+      return false unless Buttle.where(:published => true).first;
       return true
     end  
   end  
@@ -19,6 +19,7 @@ Battle::Application.routes.draw do
     match "/" => redirect {| p,request | "/buttles/#{Buttle.in_general_page.id}" }
     # root :to => "buttles#show", :id => Buttle.where(:published => true).first.id
   end  
+  match "/" => "buttles#index"
 
   resources :buttles  
   #Лоты доступны только через админку

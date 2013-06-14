@@ -12,7 +12,7 @@ page_admin = "Админка"
 
     <div style="text-align:center">
       <ul class="nav">
-        <li <% if current_page? buttle_path(Buttle.in_general_page.id) %> class="active" <% end %> >
+        <li <% if current_page? Buttle.in_general_page.nil? ? root_path : buttle_path(Buttle.in_general_page.id) %> class="active" <% end %> >
         	<%= link_to(page_general, root_path) %>
         </li>
         <!--  <li class="divider-vertical"></li> -->
