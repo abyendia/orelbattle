@@ -7,7 +7,7 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-#gem 'mysql2',:group => [:development, :test]
+gem 'mysql2'	#,:group => [:development, :test]
 gem "paperclip", "~> 3.0"
 gem 'debugger'
 gem 'stamp'
@@ -22,8 +22,8 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
 #group :production do
-  gem  'activerecord-postgresql-adapter'	
-  gem 'pg'#, '0.12.2'
+#  gem  'activerecord-postgresql-adapter'	
+#  gem 'pg'#, '0.12.2'
 #end
 
 

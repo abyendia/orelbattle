@@ -22,8 +22,6 @@ GEM
       activesupport (= 3.2.8)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-postgresql-adapter (0.0.1)
-      pg
     activeresource (3.2.8)
       activemodel (= 3.2.8)
       activesupport (= 3.2.8)
@@ -72,6 +70,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.3)
+    mysql2 (0.3.11)
     paperclip (3.4.2)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -82,7 +81,6 @@ GEM
       daemon_controller (>= 1.1.0)
       rack
       rake (>= 0.8.1)
-    pg (0.12.2)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -136,14 +134,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-postgresql-adapter
   coffee-rails (~> 3.2.1)
   debugger
   factory_girl_rails (~> 1.7.0)
   jquery-rails
+  mysql2
   paperclip (~> 3.0)
   passenger
-  pg
   rails (= 3.2.8)
   russian (~> 0.6.0)
   sass-rails (~> 3.2.3)
