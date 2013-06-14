@@ -24,9 +24,9 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   database: battle
-  encoding: utf8
+  encoding: unicode
   user: root
   password: user
   pool: 5
